@@ -1,6 +1,2 @@
-# score-management-system
-2023年ZJUT寒假软件设计大赛：学生综合测评成绩管理系统
-
-
-
-提交test ——papapatrick
+寒假软件设计大赛 参赛作品
+学生综合成绩管理系统(前端)

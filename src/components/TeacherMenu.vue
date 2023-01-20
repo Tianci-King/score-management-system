@@ -8,10 +8,12 @@ import { h, Component, defineComponent } from 'vue'
 import { NMenu,NIcon} from 'naive-ui'
 import type { MenuOption } from 'naive-ui'
 import {
-  PencilOutline as PencilIcon,
+  Pencil as PencilIcon,
   Help as HelpIcon,
-  AlarmOutline as AlarmIcon,
-  HomeOutline as HomeIcon
+  ExitOutline as ExitIcon,
+  ChatbubbleEllipsesOutline as ChatGroundIcon,
+  NewspaperOutline as ManageIcon,
+  ReceiptOutline as ExamineIcon
 } from '@vicons/ionicons5'
 import { RouterLink } from 'vue-router'
 
@@ -27,16 +29,16 @@ const menuOptions: MenuOption[] = [
         RouterLink,
         {
           to: {
-            name: 'Login',
+            name: 'Manage',
             params: {
               lang: 'zh-CN'
             }
           }
         },
-        { default: () => '注销' }
+        { default: () => '成绩管理' }
       ),
-    key: 'Home',
-    icon: renderIcon(HomeIcon),
+    key: 'Manage',
+    icon: renderIcon(ManageIcon),
   },
   {
     label: () =>
@@ -44,16 +46,16 @@ const menuOptions: MenuOption[] = [
         RouterLink,
         {
           to: {
-            name: 'Query',
+            name: 'Examine',
             params: {
               lang: 'zh-CN'
             }
           }
         },
-        { default: () => '综测成绩查询' }
+        { default: () => '审批' }
       ),
-    key: 'Query',
-    icon: renderIcon(PencilIcon),
+    key: 'Examine',
+    icon: renderIcon(ExamineIcon),
   },
   {
     label: () =>
@@ -61,7 +63,24 @@ const menuOptions: MenuOption[] = [
         RouterLink,
         {
           to: {
-            name: 'Change',
+            name: 'ChatGround2',
+            params: {
+              lang: 'zh-CN'
+            }
+          }
+        },
+        { default: () => '话题广场' }
+      ),
+    key: 'ChatGround2',
+    icon: renderIcon(ChatGroundIcon),
+  },
+  {
+    label: () =>
+      h(
+        RouterLink,
+        {
+          to: {
+            name: 'Change2',
             params: {
               lang: 'zh-CN'
             }
@@ -70,7 +89,7 @@ const menuOptions: MenuOption[] = [
         { default: () => '修改密码' }
       ),
     key: 'Change-Password',
-    icon: renderIcon(AlarmIcon),
+    icon: renderIcon(PencilIcon),
   },
   {
     label: () =>
@@ -78,18 +97,17 @@ const menuOptions: MenuOption[] = [
         RouterLink,
         {
           to: {
-            name: 'Complaints',
+            name: 'Login',
             params: {
               lang: 'zh-CN'
             }
           }
         },
-        { default: () => '申诉' }
+        { default: () => '注销' }
       ),
-    key: 'Complaints',
-    icon: renderIcon(AlarmIcon),
+    key: 'Login',
+    icon: renderIcon(ExitIcon),
   },
-  
   {
     label: '待定',
     key: 'undefined',
@@ -110,8 +128,13 @@ const menuOptions: MenuOption[] = [
 .n-menu{
   background-color: white;
     height:100%;
+<<<<<<< HEAD:src/components/Menu.vue
     position: fixed;
     width:16%;
+=======
+    position: absolute;
+    width:12%;
+>>>>>>> UI:src/components/TeacherMenu.vue
     left: 0%;
     top:80px;
 }

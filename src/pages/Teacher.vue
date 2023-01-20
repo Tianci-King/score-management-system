@@ -1,10 +1,10 @@
 <script setup lang="ts">
   import Top from '../components/Top.vue';
-  import Menu from '../components/Menu.vue';
+  import TeacherMenu from '../components/TeacherMenu.vue';
 </script>
 
 <template>
- <Menu></Menu>
+ <TeacherMenu></TeacherMenu>
  <Top></Top>
 </template>
 

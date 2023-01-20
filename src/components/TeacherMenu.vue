@@ -128,13 +128,12 @@ const menuOptions: MenuOption[] = [
 .n-menu{
   background-color: white;
     height:100%;
-<<<<<<< HEAD:src/components/Menu.vue
+    HEAD:src/components/Menu.vue;
     position: fixed;
     width:16%;
-=======
     position: absolute;
     width:12%;
->>>>>>> UI:src/components/TeacherMenu.vue
+    UI:src/components/TeacherMenu.vue;
     left: 0%;
     top:80px;
 }

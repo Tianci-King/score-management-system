@@ -17,7 +17,7 @@ height:100%;
 width: auto;
 top: 80px;
 position: absolute;
-left: 12%;
+left: 16%;
 right: 0px;
 background-color:white;
 }

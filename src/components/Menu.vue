@@ -111,7 +111,7 @@ const menuOptions: MenuOption[] = [
   background-color: white;
     height:100%;
     position: fixed;
-    width:12%;
+    width:16%;
     left: 0%;
     top:80px;
 }

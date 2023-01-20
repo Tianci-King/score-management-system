@@ -36,6 +36,7 @@ import {
 import {ref} from "vue";
 import loginApi from "../apis/login";
 import cookieStore from "../stores/cookieStore";
+import router from "../routers";
 
 const account = ref("");
 const password = ref("");
@@ -54,6 +55,7 @@ async function login(){
     console.log(res);
     piniaCookie.cookieIs(account.value);
     alert("登陆成功")
+    await router.push(res.data.data.identity.toString());
   }
   else {
     console.log(res);

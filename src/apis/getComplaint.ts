@@ -1,9 +1,9 @@
 import request from "./request";
 
-const queryApply = (account: string) => {
+const queryComplaint = (account: string) => {
     return request({
         "method": "post",
-        "url": "/api/student/queryapply",
+        "url": "/api/student/queryappeal",
         "headers": {
             'Content-Type': 'application/json',
         },
@@ -13,4 +13,4 @@ const queryApply = (account: string) => {
     })
 }
 
-export default queryApply;
+export default queryComplaint;

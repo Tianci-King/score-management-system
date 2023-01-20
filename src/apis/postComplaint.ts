@@ -1,14 +1,14 @@
 import request from "./request";
 
-const queryScore = (data: any) => {
+const postComplaint = (data: any) => {
     return request({
-        "method": "post",
         "data": data,
-        "url": "/api/student/queryscore",
+        "url": "/api/student/appeal",
+        "method": "post",
         "headers": {
             'Content-Type': 'application/json',
         }
     })
 }
 
-export default queryScore;
+export default postComplaint;

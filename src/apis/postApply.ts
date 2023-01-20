@@ -1,14 +1,14 @@
 import request from "./request";
 
-const queryScore = (data: any) => {
+const postApply = (data: any) => {
     return request({
+        "url": "/api/student/apply",
         "method": "post",
         "data": data,
-        "url": "/api/student/queryscore",
         "headers": {
             'Content-Type': 'application/json',
         }
     })
 }
-
-export default queryScore;
+export default postApply;
+//TODO: 优化接口

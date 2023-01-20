@@ -1,14 +1,14 @@
 import request from "./request";
 
-const queryScore = (data: any) => {
+const postSuggestion = (data: object) => {
     return request({
         "method": "post",
         "data": data,
-        "url": "/api/student/queryscore",
+        "url": "/api/student/advice",
         "headers": {
             'Content-Type': 'application/json',
         }
     })
 }
 
-export default queryScore;
+export default postSuggestion;

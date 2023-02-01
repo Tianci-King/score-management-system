@@ -1,6 +1,6 @@
 <script setup lang="ts">
   import { NSpace,NLayout} from 'naive-ui'
-  import postSuggestion from "../apis/postSuggestion";
+  import postSuggestion from "../apis/studentService";
 
   async function post(){
     const data = {

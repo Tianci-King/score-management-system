@@ -1,7 +1,7 @@
 <script setup lang="ts">
   import { NSpace,NLayout} from 'naive-ui'
   import {ref} from "vue";
-  import changePwd from "../apis/changePwd";
+  import changePwd from "../apis/utils/changePwd";
   import cookieStore from "../stores/cookieStore";
 
   const old_password = ref("");
@@ -62,6 +62,7 @@ background-color: white;
 }
 .button1{
   position: absolute;
+  background: red;
   right: 36%;
   top:48%;
 }

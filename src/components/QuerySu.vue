@@ -1,24 +1,29 @@
 <script setup lang="ts">
   import { NSpace,NLayout} from 'naive-ui'
   import {ref} from "vue";
-  import queryScore from "../apis/queryScore";
-
-  const year = ref("");
+  import studentService from "../apis/studentService";
+  import {Score} from "../types/score";
+  import ScoreDisplay from "./scoreDisplaySu.vue";
+  const year = ref<number>();
   const account = ref("");
-
-  async function query(){
+  const onSuccess = ref(false);
+  const resData = ref<Score[]>();
+   async function query() {
+     onSuccess.value = false
      const data = {
        "account": account.value.toString(),
-       "year": year.value.toString(),
+       "year": year.value,
      }
-
-     const res = await queryScore(data);
-     if(res.data.msg === "OK")
+     const res = await studentService.queryScore(data);
+     if (res.data.msg === "OK") {
        console.log(res.data.data);
-     //TODO: 把数据显示出来
-     else
+       resData.value = res.data.data;
+       onSuccess.value = true;
+     } else {
        alert(res.data.msg);
-  }
+     }
+   }
+
 
 </script>
 
@@ -35,8 +40,10 @@
                class="password" v-model:value="year"/>
     </div>
     <n-button class="button1" @click="query">查找</n-button>
+    <score-display v-if="onSuccess" :score="resData"></score-display>
   </n-layout>
 </n-space>
+
 </template>
 
 <style scoped>

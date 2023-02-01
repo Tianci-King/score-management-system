@@ -1,6 +1,6 @@
 <script setup lang="ts">
   import { NSpace,NLayout} from 'naive-ui'
-  import postComplaint from "../apis/postComplaint";
+  import postComplaint from "../apis/studentService";
 
   async function sendCom(){
     // const data = {

@@ -34,7 +34,7 @@ import {
   PersonOutline as PersonIcon
 } from '@vicons/ionicons5';
 import {ref} from "vue";
-import loginApi from "../apis/login";
+import loginApi from "../apis/utils/login";
 import cookieStore from "../stores/cookieStore";
 import router from "../routers";
 

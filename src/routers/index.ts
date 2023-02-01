@@ -2,7 +2,7 @@ import Login from "../pages/Login.vue";
 import Template from "../components/Template.vue";
 import Change from "../components/Change.vue";
 import Complaints from "../components/Complaints.vue";
-import Query from "../components/Query.vue"
+import Query from "../components/QuerySu.vue"
 import Student from "../pages/Student.vue";
 import Teacher from "../pages/Teacher.vue";
 import ChatGround from "../components/ChatGround.vue";

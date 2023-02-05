@@ -33,7 +33,7 @@ const routes = [
     }
   },
   {
-    path: "/Student",
+    path: "/Student/Change",
     name: "Change1",
     components: {
       'default': Student,
@@ -41,7 +41,7 @@ const routes = [
     }
   },
   {
-    path: "/Student",
+    path: "/Student/Complaints",
     name: "Complaints",
     components: {
       'default': Student,
@@ -49,7 +49,7 @@ const routes = [
     }
   },
   {
-    path: "/Student",
+    path: "/Student/Query",
     name: "Query",
     components: {
       'default': Student,
@@ -57,7 +57,7 @@ const routes = [
     }
   },
   {
-    path: "/Student",
+    path: "/Student/ChatGround",
     name: "ChatGround1",
     components: {
       'default': Student,
@@ -65,7 +65,7 @@ const routes = [
     }
   },                                        
   {
-    path: "/Student",
+    path: "/Student/MailBox",
     name: "MailBox",
     components: {
       'default': Student,
@@ -84,7 +84,7 @@ const routes = [
     }
   },
   {
-    path: "/Teacher",
+    path: "/Teacher/Change",
     name: "Change2",
     components: {
       'default': Teacher,
@@ -92,7 +92,7 @@ const routes = [
     }
   },
   {
-    path: "/Teacher",
+    path: "/Teacher/Examine",
     name: "Examine",
     components: {
       'default': Teacher,
@@ -100,7 +100,7 @@ const routes = [
     }
   },
   {
-    path: "/Teacher",
+    path: "/Teacher/ChatGround",
     name: "ChatGround2",
     components: {
       'default': Teacher,
@@ -108,7 +108,7 @@ const routes = [
     }
   },
   {
-    path: "/Teacher",
+    path: "/Teacher/Manage",
     name: "Manage",
     components: {
       'default': Teacher,

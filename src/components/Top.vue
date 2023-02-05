@@ -83,6 +83,9 @@
   </template>
   
   <style scoped>
+  .n-layout{
+    width: 200px;
+  }
   .n-layout-header {
     /* background: rgba(128, 128, 128, 0.2); */
     background-color:gainsboro;

@@ -109,10 +109,21 @@ const menuOptions: MenuOption[] = [
     icon: renderIcon(ExitIcon),
   },
   {
-    label: '待定',
-    key: 'undefined',
-    icon: renderIcon(HelpIcon),
-    disabled: true,
+    label: () =>
+        h(
+            RouterLink,
+            {
+              to: {
+                name: 'Suggestion',
+                params: {
+                  lang: 'zh-CN'
+                }
+              }
+            },
+            { default: () => '建议箱' }
+        ),
+    key: 'suggestionGet',
+    icon: renderIcon(ExitIcon),
   },
   {
     label: '待定',

@@ -1,12 +1,83 @@
 <script setup lang="ts">
   import { NSpace,NLayout} from 'naive-ui'
+  import {computed, onMounted, ref} from "vue";
+  import cookieStore from "../stores/cookieStore";
+  import postService from "../apis/postService"
+  import Post from "./post.vue";
+
+  const accountStore = cookieStore();
+  const postList = ref();
+  const title = ref();
+  const message = ref();
+  const cookie = cookieStore();
+  const showMine = ref(false);
+
+  function sendPost() {
+     postService.postPost({
+       title: title.value,
+       message: message.value,
+       count: cookie.account.toString()
+     }).then((res) => {
+       console.log(res.data);
+       if(res.data.msg === "OK") {
+         alert("发送成功！")
+         title.value = "";
+         message.value = "";
+       }
+       else
+         alert(res.data.msg)
+     }).catch((e) => {
+       console.log(e);
+     })
+  }
+
+  const filteredPostList = computed(() => {
+    return showMine.value ? postList.value.filter((post: object) => {
+      return post.count.toString() === cookie.account;
+    }) : postList.value
+  })
+  onMounted( () => {
+    postService.getPosts({
+      count: accountStore.account,
+      mine: 0
+    }).then((res) => {
+      console.log(res.data);
+      if(res.data.msg === "OK") {
+        postList.value = res.data.data;
+      }
+      else
+        alert(res.data.msg);
+    });
+
+  })
 </script>
 
 <template>
 <n-space>
   <n-layout>
    <h1 id="ChatGround">话题广场</h1>
-   <p>这是内容4</p>
+<!--    提交-->
+    <div>
+      <n-input v-model:value="title" placeholder="输入标题"/>
+      <n-input v-model:value="message" placeholder="输入内容"/>
+      <n-button type="success" @click="sendPost">发送帖子</n-button>
+    </div>
+    <div>
+      <n-switch v-model:value="showMine">
+        <template #checked>
+          只显示自己发布的内容
+        </template>
+        <template #unchecked>
+          显示所有内容
+        </template>
+      </n-switch>
+    </div>
+   <div v-for="post in filteredPostList">
+     <post :data="post">
+
+     </post>
+   </div>
+
   </n-layout>
 </n-space>
 </template>

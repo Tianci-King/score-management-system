@@ -22,4 +22,18 @@ export default class teacherService {
           "data": data
        })
    }
+
+   static async getSuggestion(data: {account: string}) {
+      return request({
+         "url": "/api/teacher/advice",
+         "method": "POST",
+         "headers": {
+            'Content-Type': 'application/json',
+         },
+         "data": data
+      })
+   }
+
+
+
 }

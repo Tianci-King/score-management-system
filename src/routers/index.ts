@@ -6,9 +6,11 @@ import Query from "../components/QuerySu.vue"
 import Student from "../pages/Student.vue";
 import Teacher from "../pages/Teacher.vue";
 import ChatGround from "../components/ChatGround.vue";
-import MailBox from "../components/MailBox.vue";
+import MailBox from "../components/suggestionPost.vue";
 import Examine from "../components/Examine.vue";
 import Manage from "../components/Manage.vue";
+import suggestionGet from "../components/suggetstionGet.vue"
+
 
 import { createRouter, createWebHistory } from "vue-router";
 
@@ -114,7 +116,16 @@ const routes = [
       'default': Teacher,
       'right': Manage,
     }
-  }
+  },
+  {
+    path: "/Teacher",
+    name: "Suggestion",
+    components: {
+      'default': Teacher,
+      'right': suggestionGet,
+    }
+  },
+
   //辅导员登陆界面
 ]
 

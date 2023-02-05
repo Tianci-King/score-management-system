@@ -13,7 +13,7 @@
   async function query() {
     onSuccess.value = false;
     const res = await teacherService.queryScore({
-       "tacount": cookie.account.toString(),//TODO: 换成生产环境
+       "tacount": cookie.account.toString(),
        "sacount": account.value,
         "year": year.value,
     })

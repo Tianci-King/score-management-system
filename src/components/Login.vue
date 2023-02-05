@@ -1,34 +1,42 @@
 <template>
-  <div class="title"><h2>综测成绩查询页面</h2></div>
+  <n-space>
+  <n-layout id="layout1"> 
 
-  <n-icon size="30" class="person">
-      <PersonIcon></PersonIcon>
-    </n-icon>
+   <h3 class="title">综测成绩查询页面</h3>
 
-  <n-icon size="32" class="key">
-      <KeyIcon></KeyIcon>
-    </n-icon>
+   <n-space vertical>  
+     <n-space space-around>  
+     <n-icon size="30" class="person">
+       <PersonIcon></PersonIcon>
+     </n-icon>
+     <n-input  round placeholder="用户名"
+     class="username" v-model:value="account"/>
+     </n-space>
+   
+     <n-space space-around>   
+     <n-icon size="32" class="key">
+       <KeyIcon></KeyIcon>
+     </n-icon>
 
-  <div>
-    <n-input  round placeholder="用户名"
-    class="username" v-model:value="account"/>
-  </div>
-  <div>
-    <n-input round placeholder="密码"
-    class="password" v-model:value="password"/>
-  </div>
-  <div>
+     <n-input round placeholder="密码"
+     class="password" v-model:value="password"/>
+     </n-space>
+ 
+   </n-space>
+
+   <n-space space-around> 
     <n-button class="button1" @click="login">登录</n-button>
-  </div>
-  <div>
     <n-button class="button2" @click="cleanText">清空</n-button>
-  </div>
+   </n-space>
+    
 
+  </n-layout>
+ </n-space>
 </template>
 
 
 <script setup lang="ts">
-import { NInput,NIcon,NButton} from 'naive-ui';
+import { NInput,NIcon,NButton,NSpace,NLayout} from 'naive-ui';
 import {
   KeyOutline as KeyIcon,
   PersonOutline as PersonIcon
@@ -72,45 +80,30 @@ function cleanText(){
 
 
 <style scoped>
-.title{  position: absolute;
-  right: 15%;
-    width: 20%;
-    top:28%;
-    font-family: Arial, Helvetica, sans-serif;
+#layout1{
+  top: 20%;
+  left: 30%;
+  width: 500px;
+  height: 500px;
+  background-color: white;
+  position: absolute;
 }
-.username{
-    position: absolute;
-    right: 20%;
-    width: 20%;
-    top:36%;
-}
-.password{
-    position: absolute;
-    right: 20%;
-    width:20%;
-    top:42%;
+
+.Title{
+  position: relative;
 }
 
 .button1{
-    position: absolute;
-    right: 36%;
-    top:48%;
-}
-.button2{
-    position: absolute;
-    right: 30%;
-    top:48%;
+  position: relative;
+  top: 3px;
+  left: 45px;
 }
 
-.person{
-    position: absolute;
-    right: 41%;
-    top:36%;
+.button2{
+  position: relative;
+  top: 3px;
+  left: 45px;
 }
-.key{
-    position: absolute;
-    right: 41%;
-    top:43%;
-}
+
 </style>
 

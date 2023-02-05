@@ -1,6 +1,6 @@
 <script setup lang="ts">
   import { NSpace,NLayout} from 'naive-ui'
-  import postComplaint from "../apis/studentService";
+  import studentService from "../apis/studentService";
 
   async function sendCom(){
     // const data = {
@@ -17,7 +17,7 @@
       "appeal": "123",
       "appeal_reason": "123",
     }
-    const res = await postComplaint(data);
+    const res = await studentService.getComplaint(data);
     if(res.data.msg === "OK")
       alert("申诉成功!");
     else {

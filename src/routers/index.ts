@@ -10,8 +10,10 @@ import MailBox from "../components/suggestionPost.vue";
 import ExamineAppeal from "../components/ExamineAppeal.vue";
 import ExamineApplication from "../components/ExamineApplication.vue"
 import Manage from "../components/Manage.vue";
-import suggestionGet from "../components/suggetstionGet.vue"
-
+import suggestionGet from "../components/suggetstionGet.vue";
+import adminTea from "../components/adminTea.vue";
+import adminStu from "../components/adminStu.vue";
+import admin from "../pages/admin.vue";
 
 import { createRouter, createWebHistory } from "vue-router";
 
@@ -136,6 +138,24 @@ const routes = [
   },
 
   //辅导员登陆界面
+
+  // 管理员登陆界面
+  {
+    path: "/admin",
+    name: "adminTea",
+    components: {
+      'default': admin,
+      'right': adminTea,
+    }
+  },
+  {
+    path: "/admin/adminStu",
+    name: "adminStu",
+    components: {
+      'default': admin,
+      'right': adminStu,
+    }
+  }
 ]
 
 const router = createRouter({

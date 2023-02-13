@@ -16,12 +16,14 @@
              <person-icon />
           </n-icon>
 
-          <p id="Title">用户页面</p>
+          <p id="Title1">用户页面</p>
 
           <n-icon size="30" id="key-icon">
              <key-icon />
           </n-icon>
           
+          <a id="Title2" href="/Student/Change" class=" text-white nav-link">修改密码</a>
+
           <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
             <symbol id="home" viewBox="0 0 16 16">
               <path
@@ -106,13 +108,19 @@
 
   #key-icon{
     position: fixed;
-    right:8%;
-    top:20px;
+    right:7.6%;
+    top:6px;
   }
 
-  #Title{
+  #Title1{
     position:fixed;
     left: 70px;
     top:22px;
+  }
+
+  #Title2{
+    position: fixed;
+    right: 7%;
+    top:36px;
   }
   </style>

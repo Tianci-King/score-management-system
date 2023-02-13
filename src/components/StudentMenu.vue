@@ -146,7 +146,7 @@ const menuOptions: MenuOption[] = [
 .n-menu{
   background-color: white;
     height:100%;
-    position: absolute;
+    position: fixed;
     width:12%;
     left: 0%;
     top:80px;

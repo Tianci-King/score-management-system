@@ -31,14 +31,14 @@
 <template>
 <n-space>
   <n-layout>
-    <h1 id="Query">管理</h1>
+    <h1 id="Query">成绩管理</h1>
     <div>
       <n-input  round placeholder="学号"
-                class="username" v-model:value="account"/>
+                class="account" v-model:value="account"/>
     </div>
     <div>
       <n-input round placeholder="年份"
-               class="password" v-model:value="year"/>
+               class="year" v-model:value="year"/>
     </div>
     <n-button class="button1" @click="query">查找</n-button>
     <score-display-tea v-if="onSuccess" :res="resData"></score-display-tea>
@@ -55,5 +55,11 @@ position: absolute;
 left: 12%;
 right: 0px;
 background-color: white;
+}
+.year{
+  width: 200px;
+}
+.account{
+  width: 200px;
 }
 </style>

@@ -46,15 +46,32 @@ const menuOptions: MenuOption[] = [
         RouterLink,
         {
           to: {
-            name: 'Examine',
+            name: 'ExamineAppeal',
             params: {
               lang: 'zh-CN'
             }
           }
         },
-        { default: () => '审批' }
+        { default: () => '审批申诉' }
       ),
-    key: 'Examine',
+    key: 'ExamineAppeal',
+    icon: renderIcon(ExamineIcon),
+  },
+   {
+    label: () =>
+      h(
+        RouterLink,
+        {
+          to: {
+            name: 'ExamineApplication',
+            params: {
+              lang: 'zh-CN'
+            }
+          }
+        },
+        { default: () => '审批申报' }
+      ),
+    key: 'ExamineApplication',
     icon: renderIcon(ExamineIcon),
   },
   {

@@ -7,7 +7,8 @@ import Student from "../pages/Student.vue";
 import Teacher from "../pages/Teacher.vue";
 import ChatGround from "../components/ChatGround.vue";
 import MailBox from "../components/suggestionPost.vue";
-import Examine from "../components/Examine.vue";
+import ExamineAppeal from "../components/ExamineAppeal.vue";
+import ExamineApplication from "../components/ExamineApplication.vue"
 import Manage from "../components/Manage.vue";
 import suggestionGet from "../components/suggetstionGet.vue"
 
@@ -94,11 +95,19 @@ const routes = [
     }
   },
   {
-    path: "/Teacher/Examine",
-    name: "Examine",
+    path: "/Teacher/ExamineAppeal",
+    name: "ExamineAppeal",
     components: {
       'default': Teacher,
-      'right': Examine,
+      'right': ExamineAppeal,
+    }
+  },
+  {
+    path: "/Teacher/ExamineApplication",
+    name: "ExamineApplication",
+    components: {
+      'default': Teacher,
+      'right': ExamineApplication,
     }
   },
   {

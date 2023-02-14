@@ -5,6 +5,9 @@
   import deleteAPI from '../apis/Examine/ApplicationDel';
   import getAPI from '../apis/Examine/ApplicationGet';
   import cookieStore from '../stores/cookieStore';
+  import getExcuseAPI from '../apis/Excuse/ExcuseGet';
+  import updateExcuseAPI from '../apis/Excuse/ExcuseUpdate';
+  import deleteExcuseAPI from '../apis/Excuse/ExcuseDel';
   const piniaCookie = cookieStore();
   const account = piniaCookie.account 
   const message = ref("");
@@ -13,8 +16,60 @@
   const Application2 = {score:"2",score_reason:"2",score_type:"d21",time:'2007.06.30 12:08:55',state:1,id:2}
   const Application3 = {score:"3",score_reason:"3",score_type:"d21",time:'2007.06.30 12:08:55',state:0,id:3}
   const ApplicationTest =[Application1,Application2,Application3]   //测试使用
-  const selectedId = ref(1); 
+  const selectedId = ref(); 
   let Applications = <any>ref([]);//获取的数据
+   
+  const Excuses = <any>ref([]);//理由库获取的数据
+
+  const newExcuse =ref('');
+  const Excuse = ref('');
+  const ExcuseId = ref();
+  
+  
+  const onClickExcuse =()=>{
+   const findLabel = ()=>{
+   for (let i = 0 ; i<Excuses.length ; i++) {
+   if(Excuses[i].value === ExcuseId.value) {
+   Excuse.value = Excuses[i].label;
+    }
+   }
+  }
+   findLabel();
+   message.value = Excuse.value;
+  }//理由库的使用
+
+  const ExcuseGet = async()=>{
+    const res = await getExcuseAPI({
+    account:account
+    })
+    console.log(res);
+    console.log("获取理由库数据成功"); 
+    return res.data;
+  }
+
+
+
+  const onClickExcuseUpdate= async()=>{
+    const res = await updateExcuseAPI({
+      label:newExcuse.value,
+    })
+    console.log(res);
+    const list = await ExcuseGet();
+    Excuses.value = list.data
+  }
+
+
+  const onClickExcuseDelete= async(value:any)=>{
+    const res = await deleteExcuseAPI({
+      value:value
+    })
+    console.log(res);
+    const list = await ExcuseGet();
+    Excuses.value = list.data
+  } //理由库的接口函数
+
+
+
   const onClickSelect = (id:number)=>{
   selectedId.value = id;
   }
@@ -65,12 +120,12 @@
   }
 
 
-
-
   onMounted(
   async ()=>{
   const res = await getApplications();
   Applications.value = res.data;
+  const res2 = await getExcuseAPI();
+  Excuses.value = res2.data;
 })
 
 </script>
@@ -92,7 +147,8 @@
              <th>申报原因</th>
              <th>申报时间</th>
              <th>审批状态</th>
-             <th></th>
+             <th>审批理由</th>
+             <th>审批建议</th>
              <th></th>
              </tr>
            </thead>
@@ -104,7 +160,8 @@
                <td>{{ Application.score_reason }}</td>
                <td>{{ Application.time }}</td>
                <td>{{ Application.state }}</td>
-               <td></td>
+               <td>{{ Application.message }}</td>
+               <td>{{ Application.advice }}</td>
                <td><n-button size="small" @click="onClickSelect(Application.id)">选择</n-button></td>
                <td><n-button size="small" v-if="Application.state!==0" @click="onClickDelete(Application.id)">撤回</n-button></td>
               </tr>
@@ -129,6 +186,26 @@
               <n-button @click="onClickUpdate2">驳回</n-button>
             </n-space>
        </n-space>  
+ 
+       <n-space vertical>
+        <h2>理由库</h2>
+        <n-select vertical placeholder="选择理由" :options="Excuses" v-model:value="ExcuseId" 
+        ></n-select>
+
+        <n-space>
+        <n-input disabled placeholder="选中的理由序号:" id="h2"></n-input>  
+        <p>{{ ExcuseId }}</p> 
+        </n-space>
+    
+        <n-space>
+        <n-button @click="onClickExcuse">上传</n-button>
+        <n-button @click="onClickExcuseDelete">删除</n-button>
+        </n-space>
+        <n-input placeholder="新建理由内容"
+        v-model:value="newExcuse" 
+        ></n-input>
+        <n-button @click="onClickExcuseUpdate">新建</n-button>
+       </n-space>
 
   </n-space>
 
@@ -139,7 +216,7 @@
 <style scoped>
 #layout1{
 height:100%;
-width: auto;
+width: 80%;
 top: 80px;
 position: absolute;
 left: 12%;

@@ -28,7 +28,7 @@ import {computed, ref} from "vue";
 function getData(res: object): Score[]{
   let ansArr: Score[] = [];
   for(let item in res){
-    if(item.length <= 3){
+    if(item.length <= 3 && item !== "id"){
       ansArr.push({
         name: itemMsg[item].name.toString(),
         grade: res[item]

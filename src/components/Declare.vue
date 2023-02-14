@@ -14,7 +14,7 @@ import internal from 'stream';
   async function sendCom(){
     const data = {
       "count": account,
-      "year": formyear,
+      "year": parseInt(formyear),
       "appeal": formappeal,
       "appeal_reason": formappeal_reason,
     }

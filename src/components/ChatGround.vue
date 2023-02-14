@@ -79,9 +79,7 @@
       </n-switch>
     </div>
    <div v-for="post in filteredPostList">
-     <post :data="post">
-
-     </post>
+     <post :data="post" @change="getPostItem" />
    </div>
 
   </n-layout>

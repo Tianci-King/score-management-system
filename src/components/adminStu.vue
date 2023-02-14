@@ -2,7 +2,7 @@
   <n-space>
     <n-layout>
       <h1>添加学生账号</h1>
-      <student-item :data="addData" :is-add="true" @add="addStudentItem"/>
+      <student-item :data="addData" :is-add="true" @add="addStudentItem" @del="getStudentItem"/>
       <template v-for="item in formData">
           <student-item :data="item" :is-add="false" />
       </template>

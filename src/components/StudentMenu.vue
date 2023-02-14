@@ -81,13 +81,13 @@ const menuOptions: MenuOption[] = [
         RouterLink,
         {
           to: {
-            name: 'Change1',
+            name: 'Declare',
             params: {
               lang: 'zh-CN'
             }
           }
         },
-        { default: () => '修改密码' }
+        { default: () => '申报' }
       ),
     key: 'Change-Password',
     icon: renderIcon(PencilIcon),

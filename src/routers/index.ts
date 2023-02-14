@@ -11,6 +11,7 @@ import ExamineAppeal from "../components/ExamineAppeal.vue";
 import ExamineApplication from "../components/ExamineApplication.vue"
 import Manage from "../components/Manage.vue";
 import suggestionGet from "../components/suggetstionGet.vue"
+import Apply from "../components/apply.vue";
 
 
 import { createRouter, createWebHistory } from "vue-router";
@@ -57,6 +58,14 @@ const routes = [
     components: {
       'default': Student,
       'right': Query,
+    }
+  },
+  {
+    path: "/Student/Apply",
+    name: "Apply",
+    components: {
+      'default': Student,
+      'right': Apply,
     }
   },
   {

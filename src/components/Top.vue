@@ -22,7 +22,7 @@
              <key-icon />
           </n-icon>
           
-          <a id="Title2" href="/Student/Change" class=" text-white nav-link">修改密码</a>
+     
 
           <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
             <symbol id="home" viewBox="0 0 16 16">

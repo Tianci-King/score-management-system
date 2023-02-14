@@ -12,6 +12,8 @@ import ExamineApplication from "../components/ExamineApplication.vue"
 import Manage from "../components/Manage.vue";
 import adminTea from "../components/adminTea.vue";
 import adminStu from "../components/adminStu.vue";
+import suggestionGet from "../components/suggetstionGet.vue"
+import Declare from "../components/Declare.vue"
 import admin from "../pages/admin.vue";
 
 import { createRouter, createWebHistory } from "vue-router";
@@ -50,6 +52,14 @@ const routes = [
     components: {
       'default': Student,
       'right': Complaints,
+    }
+  },
+  {
+    path: "/Student/Declare",
+    name: "Declare",
+    components: {
+      'default': Student,
+      'right': Declare,
     }
   },
   {

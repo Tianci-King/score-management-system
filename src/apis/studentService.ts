@@ -1,4 +1,5 @@
 import request from "./utils/request";
+import { Ref } from "vue";
 
 export default class studentService {
     static async queryScore(data: object) {
@@ -12,7 +13,7 @@ export default class studentService {
         })
     }
 
-    static async queryApply(account: string) {
+    static async queryApply(account: Ref<string>) {
         return request({
             "method": "post",
             "url": "/api/student/queryapply",

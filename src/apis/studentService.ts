@@ -16,7 +16,7 @@ export default class studentService {
     static async queryApply(account: Ref<string>) {
         return request({
             "method": "post",
-            "url": "/api/student/queryapply",
+            "url": "/api/student/queryappeal",
             "headers": {
                 'Content-Type': 'application/json',
             },

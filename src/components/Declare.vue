@@ -40,6 +40,7 @@ import internal from 'stream';
    </div>
 
    <n-upload
+    id="form"
     multiple
     directory-dnd
     action="https://www.mocky.io/v2/5e4bafc63100007100d8b70f"
@@ -52,10 +53,10 @@ import internal from 'stream';
         </n-icon>
       </div>
       <n-text style="font-size: 16px">
-        点击或者拖动文件到该区域来上传
+        点击或者拖动文件到该区域
       </n-text>
       <n-p depth="3" style="margin: 8px 0 0 0">
-        请不要上传敏感数据，比如你的银行卡号和密码，信用卡号有效期和安全码
+        上传您需要申报的文件
       </n-p>
     </n-upload-dragger>
   </n-upload>
@@ -81,5 +82,9 @@ position: absolute;
 left: 16%;
 right: 0px;
 background-color:white;
+}
+
+#form{
+  width: 50%;
 }
 </style>

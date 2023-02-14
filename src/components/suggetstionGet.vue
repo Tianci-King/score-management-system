@@ -32,7 +32,7 @@ onMounted(() => {
       <div v-if="suggestionList !== null" v-for="suggestion in suggestionList">
         <n-card title="{{suggestion.question}}">
           <template>
-              {{suggestion.account}} : {{suggestion.advice}}
+              {{suggestion.account}}说 : {{suggestion.advice}}
             </template>
         </n-card>
       </div>

@@ -16,7 +16,7 @@ import { Vue2 } from "vue-demi";
    let routerPathFrontNumber = str.indexOf("/");
    const routerPathFront = str.substring(0,routerPathFrontNumber);
 
-   
+
 </script>
 
   <template>
@@ -34,6 +34,7 @@ import { Vue2 } from "vue-demi";
              <key-icon />
           </n-icon>
           
+
           <a id="Title2" :href="'/'+routerPathFront+'/Change'" class=" text-white nav-link">修改密码</a>
 
           <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">

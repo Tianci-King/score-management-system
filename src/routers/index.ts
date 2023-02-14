@@ -15,6 +15,8 @@ import adminStu from "../components/adminStu.vue";
 import suggestionGet from "../components/suggetstionGet.vue"
 import Declare from "../components/Declare.vue"
 import admin from "../pages/admin.vue";
+import Apply from "../components/apply.vue";
+
 
 import { createRouter, createWebHistory } from "vue-router";
 
@@ -68,6 +70,14 @@ const routes = [
     components: {
       'default': Student,
       'right': Query,
+    }
+  },
+  {
+    path: "/Student/Apply",
+    name: "Apply",
+    components: {
+      'default': Student,
+      'right': Apply,
     }
   },
   {

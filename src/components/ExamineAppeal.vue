@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import { NSpace,NLayout,NButton,NTable,NInput} from 'naive-ui'
+  import { NSpace,NLayout,NButton,NTable,NInput,NSelect } from 'naive-ui'
   import {ref,onMounted} from "vue";
   import updateAPI from '../apis/Examine/AppealUpdate';
   import deleteAPI from '../apis/Examine/AppealDel';
@@ -16,6 +16,66 @@
   const selectedId = ref(1); 
   let Appeals = <any>ref([]);//获取的数据
   
+
+  const options = [
+        {
+          label: "Everybody's Got Something to Hide Except Me and My Monkey",
+          value: 'song0',
+          disabled: true
+        },
+        {
+          label: 'Drive My Car',
+          value: 'song1'
+        },
+        {
+          label: 'Norwegian Wood',
+          value: 'song2'
+        },
+        {
+          label: "You Won't See",
+          value: 'song3',
+          disabled: true
+        },
+        {
+          label: 'Nowhere Man',
+          value: 'song4'
+        },
+        {
+          label: 'Think For Yourself',
+          value: 'song5'
+        },
+        {
+          label: 'The Word',
+          value: 'song6'
+        },
+        {
+          label: 'Michelle',
+          value: 'song7',
+          disabled: true
+        },
+        {
+          label: 'What goes on',
+          value: 'song8'
+        },
+        {
+          label: 'Girl',
+          value: 'song9'
+        },
+        {
+          label: "I'm looking through you",
+          value: 'song10'
+        },
+        {
+          label: 'In My Life',
+          value: 'song11'
+        },
+        {
+          label: 'Wait',
+          value: 'song12'
+        }
+      ]
+
+
   const onClickSelect = (id:number)=>{
   selectedId.value = id;
   }
@@ -105,7 +165,7 @@
                <td>{{ Appeal.state }}</td>
                <td></td>
                <td><n-button size="small" @click="onClickSelect(Appeal.id)">选择</n-button></td>
-               <td><n-button size="small" v-if="Appeal.state==1" @click="onClickDelete(Appeal.id)">撤回</n-button></td>
+               <td><n-button size="small" v-if="Appeal.state!==0" @click="onClickDelete(Appeal.id)">撤回</n-button></td>
               </tr>
            </tbody>
          </n-table>
@@ -128,6 +188,12 @@
               <n-button @click="onClickUpdate2">驳回</n-button>
             </n-space>
        </n-space>  
+       
+       <n-space vertical>
+        <h2>理由库</h2>
+        <n-select vertical placeholder="选择理由" :options="options" ></n-select>
+
+       </n-space>
 
   </n-space>
 
@@ -138,7 +204,7 @@
 <style scoped>
 #layout1{
 height:100%;
-width: auto;
+width: 80%;
 top: 80px;
 position: absolute;
 left: 12%;

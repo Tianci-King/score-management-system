@@ -81,23 +81,6 @@ const menuOptions: MenuOption[] = [
         RouterLink,
         {
           to: {
-            name: 'Declare',
-            params: {
-              lang: 'zh-CN'
-            }
-          }
-        },
-        { default: () => '申报' }
-      ),
-    key: 'Change-Password',
-    icon: renderIcon(PencilIcon),
-  },
-  {
-    label: () =>
-      h(
-        RouterLink,
-        {
-          to: {
             name: 'Complaints',
             params: {
               lang: 'zh-CN'
@@ -108,6 +91,40 @@ const menuOptions: MenuOption[] = [
       ),
     key: 'Complaints',
     icon: renderIcon(ComplaintsIcon),
+  },
+  {
+    label: () =>
+      h(
+        RouterLink,
+        {
+          to: {
+            name: 'Apply',
+            params: {
+              lang: 'zh-CN'
+            }
+          }
+        },
+        { default: () => '申报' }
+      ),
+    key: 'Apply',
+    icon: renderIcon(ComplaintsIcon),
+  },
+  {
+    label: () =>
+      h(
+        RouterLink,
+        {
+          to: {
+            name: 'Change1',
+            params: {
+              lang: 'zh-CN'
+            }
+          }
+        },
+        { default: () => '修改密码' }
+      ),
+    key: 'Change-Password',
+    icon: renderIcon(PencilIcon),
   },
   {
     label: () =>

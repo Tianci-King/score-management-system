@@ -29,6 +29,7 @@
      }).catch((e) => {
        console.log(e);
      })
+     getPostItem();
   }
 
   const filteredPostList = computed(() => {
@@ -36,7 +37,8 @@
       return post.count.toString() === cookie.account;
     }) : postList.value
   })
-  onMounted( () => {
+
+  function getPostItem() {
     postService.getPosts({
       count: accountStore.account,
       mine: 0
@@ -49,6 +51,10 @@
         alert(res.data.msg);
     });
 
+  }
+
+  onMounted(() => {
+    getPostItem();
   })
 </script>
 

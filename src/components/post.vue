@@ -125,7 +125,6 @@ function edit() {
     })
   }
 
-
 const postData  = computed(() => {
   return props.data;
 });

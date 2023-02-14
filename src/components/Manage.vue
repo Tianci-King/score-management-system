@@ -13,9 +13,9 @@
   async function query() {
     onSuccess.value = false;
     const res = await teacherService.queryScore({
-       "tacount": cookie.account.toString(),
-       "sacount": account.value,
-        "year": year.value,
+       "tcount": cookie.account.toString(),
+       "scount": account.value,
+        "year": parseInt(year.value),
     })
     if(res.data.msg === "OK"){
         resData.value = res.data.data;
@@ -25,7 +25,7 @@
       alert(res.data.msg)
     }
   }
-
+  //TODO: 分数项大象自动计算 话题广场自动刷新 建议修改页面显示，接口没问题 申报时间 match管理 审批申诉状态显示数据
 </script>
 
 <template>
@@ -63,3 +63,6 @@ background-color: white;
   width: 200px;
 }
 </style>
+
+
+

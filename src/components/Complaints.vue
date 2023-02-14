@@ -4,14 +4,15 @@
   import internal from 'stream';
   import studentService from "../apis/studentService";
   import cookieStore from '../stores/cookieStore';
-  import { Ref,ref } from "vue"
+  import { Ref,ref,onMounted } from "vue"
 
   const store = cookieStore();
   const { account } = storeToRefs(store);
   let formyear:number;
   let formappeal:string;
   let formappeal_reason:string;
-  let res = <any>ref([]);
+  var formdata = <any>ref([]);
+  var form:any;
 
   async function sendCom(){
     const data = {
@@ -20,7 +21,7 @@
       "appeal": formappeal,
       "appeal_reason": formappeal_reason,
     }
-    const res = await studentService.getComplaint(data);
+    const res = await studentService.postApply(data);
     if(res.data.msg === "OK")
       alert("申诉成功!");
     else {
@@ -30,9 +31,12 @@
   }
 
   async function getCom() {
-    res = await studentService.queryApply(account);
-    if(res.data.msg === "OK")
+    const res = await studentService.queryApply(account);
+    if(res.data.msg === "OK") {
       alert("查询申诉结果成功！");
+      formdata.value = res.data.data;
+      //forms = JSON.parse(JSON.stringify(formdata.value.data));
+    }
     else if(res.data.msg === "未提交过申诉" || res.data.code === 404) {
       alert("未提交过申诉，查询结果为空！")
     }
@@ -41,7 +45,6 @@
       console.log(res.data);
     }
   }
-  // 表单制作
   
 </script>
 
@@ -84,7 +87,7 @@
              </tr>
            </thead>
            <tbody>
-            <tr v-for="form in res.data">
+            <tr v-for="form in formdata">
               <td>{{ form.id }}</td>
               <td>{{ form.appeal }}</td>
               <td>{{ form.appeal_reason }}</td>

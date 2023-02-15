@@ -5,9 +5,9 @@
   import deleteAPI from '../apis/Examine/ApplicationDel';
   import getAPI from '../apis/Examine/ApplicationGet';
   import cookieStore from '../stores/cookieStore';
-  import getExcuseAPI from '../apis/Excuse/ExcuseGet';
-  import updateExcuseAPI from '../apis/Excuse/ExcuseUpdate';
-  import deleteExcuseAPI from '../apis/Excuse/ExcuseDel';
+  import getExcuseAPI from '../apis/Examine/ExcuseGet';
+  import updateExcuseAPI from '../apis/Examine/ExcuseUpdate';
+  import deleteExcuseAPI from '../apis/Examine/ExcuseDel';
   const piniaCookie = cookieStore();
   const account = piniaCookie.account 
   const message = ref("");
@@ -18,29 +18,26 @@
   const ApplicationTest =[Application1,Application2,Application3]   //测试使用
   const selectedId = ref(); 
   let Applications = <any>ref([]);//获取的数据
-   
-  const Excuses = <any>ref([]);//理由库获取的数据
-
+  let Excuses = <any>ref([]);//理由库获取的数据
   const newExcuse =ref('');
-  const Excuse = ref('');
   const ExcuseId = ref();
   
-  
-  const onClickExcuse =()=>{
-   const findLabel = ()=>{
-   for (let i = 0 ; i<Excuses.length ; i++) {
-   if(Excuses[i].value === ExcuseId.value) {
-   Excuse.value = Excuses[i].label;
+
+  const onClickExcuse =async()=>{
+     const list = await ExcuseGet();
+     Excuses = list.data
+     const findLabel = ()=>{
+     for (let i = 0 ; i<Excuses.length ; i++) {
+      if(Excuses[i].value === ExcuseId.value ) 
+       {message.value = Excuses[i].label;}
+      }
     }
-   }
-  }
-   findLabel();
-   message.value = Excuse.value;
+    findLabel();
   }//理由库的使用
 
   const ExcuseGet = async()=>{
     const res = await getExcuseAPI({
-    account:account
+    count:account
     })
     console.log(res);
     console.log("获取理由库数据成功"); 
@@ -124,7 +121,7 @@
   async ()=>{
   const res = await getApplications();
   Applications.value = res.data;
-  const res2 = await getExcuseAPI();
+  const res2 = await ExcuseGet();
   Excuses.value = res2.data;
 })
 

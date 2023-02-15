@@ -1,4 +1,4 @@
-import request from "./request";
+import request from "../Excuse/request";
 
 const updateExcuseAPI = (data?: any) => {
     return request({

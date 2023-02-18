@@ -4,18 +4,34 @@
   import { storeToRefs} from "pinia";
   import studentService from '../apis/studentService';
   import {  Ref,ref } from 'vue';
+import internal from 'stream';
   var formdata = <any>ref([]);
-
+  
   const store = cookieStore();
   const { account } = storeToRefs(store);
+  
+  let formyear:number | string = "";
+  let formscoretype:string | undefined = undefined;
+  let formscore:number | undefined = undefined;
+  let formscoreres:string | undefined = undefined;
+
+  var forminfo:object = {
+    count: account.value,
+    year: parseInt(formyear),
+    score_type: formscoretype,
+    score: formscore,
+    score_reason: formscoreres,
+  }
+
   async function getCom() {
     const res = await studentService.queryApply(account.value);
     if(res.data.msg === "OK") {
-      alert("查询申诉结果成功！");
+      alert("查询申报结果成功！");
       formdata.value = res.data.data;
+      console.log(forminfo);
     }
-    else if (res.data.msg === "未提交过申诉" || res.data.code === 404) {
-      alert("未提交过申诉，查询结果为空！");
+    else if (res.data.msg === "未提交过申报" || res.data.code === 404) {
+      alert("未提交过申报，查询结果为空！");
     }
     else {
       alert("网络连接不正常 :(");
@@ -28,11 +44,24 @@
 <n-space>
   <n-layout>
    <h1 id="Blank">申报</h1>
+   <p>填写您需要申报的信息表单</p>
+   <n-space vertical>
+            <n-input placeholder="所要申报内容的学年" v-model:value="formyear" autosize style="min-width: 90%"></n-input>
+            <n-input placeholder="所要申报的项目类型" v-model:value="formscoretype" autosize style="min-width: 90%"
+              size="large"></n-input>
+              <n-input placeholder="申报分数" v-model:value="formscore" autosize style="min-width: 90%"
+              size="large"></n-input>
+            <n-input placeholder="申报理由" v-model:value="formscoreres" autosize style="min-width: 90%"
+              size="large"></n-input>
+          </n-space>
+          <br />
    <p>上传您需要申报的文件</p>
    <n-upload
     multiple
     directory-dnd
     action="/api/student/apply"
+    method="put"
+    data: forminfo
     :max="5"
   >
     <n-upload-dragger>
@@ -50,15 +79,16 @@
     </n-upload-dragger>
   </n-upload>
 
-  <br /> <br /> <br /> 
+  </n-layout>
+</n-space>
 
-        <n-space vertical>
-          <h1>申报查询</h1>
+<n-space vertical>
+          <n-layout  class="shenbao">
+            <h1>申报查询</h1>
           <n-space>
             <n-button @click="getCom">申报查询</n-button>
           </n-space>
-          <br />
-
+          </n-layout>
           <n-space>
             <n-layout class="form">
               <n-table>
@@ -76,8 +106,8 @@
                 <tbody>
                   <tr v-for="form in formdata">
                     <td>{{ form.id }}</td>
-                    <td>{{ form.appeal }}</td>
-                    <td>{{ form.appeal_reason }}</td>
+                    <td>{{ form.type }}</td>
+                    <td>{{ form.score_reason }}</td>
                     <td>{{ form.time }}</td>
                     <td v-if="form.state === 1">已通过</td>
                     <td v-if="form.state === 0">未审批</td>
@@ -87,15 +117,14 @@
               </n-table>
             </n-layout>
           </n-space>
+          
         </n-space>
-  </n-layout>
-</n-space>
 </template>
 
 <style scoped>
 .n-layout{
 height:100%;
-width: 50%;
+width: 30%;
 top: 80px;
 position: absolute;
 left: 16%;
@@ -105,8 +134,13 @@ background-color: white;
 
 
 .form {
-  top: 450px;
-  left: 0%;
-  width: auto;
+  top: 200px;
+  left: 50%;
+  width: 47%;
+}
+
+.shenbao {
+  top:80px;
+  left:50%;
 }
 </style>

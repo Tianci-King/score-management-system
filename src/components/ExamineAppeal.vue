@@ -22,18 +22,10 @@
   const newExcuse =ref('');
   const ExcuseId = ref();
   
-  onMounted(
-  async ()=>{
-  const res = await getAppeals();
-  Appeals.value = res.data;
-  const res2 = await ExcuseGet();
-  Excuses.value = res2.data;
-  })
 
-   
   const onClickExcuse =async()=>{
      const list = await ExcuseGet();
-     Excuses = list.data
+     Excuses.value = list.data
      const findLabel = ()=>{
      for (let i = 0 ; i<Excuses.length ; i++) {
       if(Excuses[i].value === ExcuseId.value ) 
@@ -87,8 +79,7 @@
      state:1,
     });
     console.log(res);
-    const list = await getAppeals();
-    Appeals.value = list.data;
+    stateChange();
   }  
   //Update1是通过申诉
 
@@ -100,8 +91,7 @@
      state:2,
     });
     console.log(res);
-    const list = await getAppeals();
-    Appeals.value = list.data;
+    stateChange();
   }
   //Update2是驳回申诉
 
@@ -110,8 +100,7 @@
      id:id
      });
     console.log(res);
-    const list = await getAppeals();
-    Appeals.value = list.data;
+    stateChange();
    } 
 
 
@@ -126,8 +115,30 @@
     return res.data;
   }
 
+  const stateChange = async ()=>{
+  const list = await getAppeals();
+  Appeals = list.data;
+  const change=()=>{  
+    for(let i=0;i<Appeals.length;i++)
+    {
+      if(Appeals[i].state===0){Appeals[i].state1="未审批"}
+      else{Appeals[i].state1="已审批"}
+      console.log(Appeals[i].state1)  
+    }
+  };
+  change();
 
+  }
 
+  onMounted(
+  async ()=>{
+  const res = await getAppeals();
+  Appeals.value = res.data;
+  const res2 = await ExcuseGet();
+  Excuses.value = res2.data;
+  stateChange();
+  console.log(Appeals)
+  })
 
 </script>
  
@@ -158,7 +169,7 @@
                <td>{{ Appeal.appeal }}</td>
                <td>{{ Appeal.appeal_reason }}</td>
                <td>{{ Appeal.time }}</td>
-               <td>{{ Appeal.state }}</td>
+               <td>{{ Appeal.state1  }}</td>
                <td>{{ Appeal.advice }}</td>
                <td>{{ Appeal.message }}</td>
                <td><n-button size="small" @click="onClickSelect(Appeal.id)">选择</n-button></td>

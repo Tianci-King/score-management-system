@@ -10,7 +10,11 @@ import MailBox from "../components/suggestionPost.vue";
 import ExamineAppeal from "../components/ExamineAppeal.vue";
 import ExamineApplication from "../components/ExamineApplication.vue"
 import Manage from "../components/Manage.vue";
+import adminTea from "../components/adminTea.vue";
+import adminStu from "../components/adminStu.vue";
 import suggestionGet from "../components/suggetstionGet.vue"
+import Declare from "../components/Declare.vue"
+import admin from "../pages/admin.vue";
 import Apply from "../components/apply.vue";
 
 
@@ -50,6 +54,14 @@ const routes = [
     components: {
       'default': Student,
       'right': Complaints,
+    }
+  },
+  {
+    path: "/Student/Declare",
+    name: "Declare",
+    components: {
+      'default': Student,
+      'right': Declare,
     }
   },
   {
@@ -145,6 +157,24 @@ const routes = [
   },
 
   //辅导员登陆界面
+
+  // 管理员登陆界面
+  {
+    path: "/admin",
+    name: "adminTea",
+    components: {
+      'default': admin,
+      'right': adminTea,
+    }
+  },
+  {
+    path: "/admin/adminStu",
+    name: "adminStu",
+    components: {
+      'default': admin,
+      'right': adminStu,
+    }
+  }
 ]
 
 const router = createRouter({

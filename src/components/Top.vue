@@ -5,6 +5,18 @@
     PersonOutline as PersonIcon,
     KeyOutline as KeyIcon
    } from '@vicons/ionicons5';
+
+   import { defineComponent, ref, watch, toRaw } from "vue";
+   import { useRoute } from "vue-router";
+import { Vue2 } from "vue-demi";
+
+   let router = useRoute();
+   let routerPath = router.path;
+   let str = routerPath.substring(1);
+   let routerPathFrontNumber = str.indexOf("/");
+   const routerPathFront = str.substring(0,routerPathFrontNumber);
+
+
 </script>
 
   <template>
@@ -22,7 +34,8 @@
              <key-icon />
           </n-icon>
           
-     
+
+          <a id="Title2" :href="'/'+routerPathFront+'/Change'" class=" text-white nav-link">修改密码</a>
 
           <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
             <symbol id="home" viewBox="0 0 16 16">

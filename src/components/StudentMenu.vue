@@ -107,23 +107,6 @@ const menuOptions: MenuOption[] = [
         { default: () => '申报' }
       ),
     key: 'Apply',
-    icon: renderIcon(ComplaintsIcon),
-  },
-  {
-    label: () =>
-      h(
-        RouterLink,
-        {
-          to: {
-            name: 'Change1',
-            params: {
-              lang: 'zh-CN'
-            }
-          }
-        },
-        { default: () => '修改密码' }
-      ),
-    key: 'Change-Password',
     icon: renderIcon(PencilIcon),
   },
   {

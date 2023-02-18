@@ -1,9 +1,10 @@
 <script setup lang="ts">
-  import { NSpace,NLayout} from 'naive-ui'
+  import { NSpace,NLayout,NInput,NSwitch,NButton,NIcon } from 'naive-ui'
   import {computed, onMounted, ref} from "vue";
   import cookieStore from "../stores/cookieStore";
   import postService from "../apis/postService"
   import Post from "./post.vue";
+  import { ArrowBackOutline, ArrowForwardOutline } from '@vicons/ionicons5'
 
   const accountStore = cookieStore();
   const postList = ref();
@@ -32,7 +33,7 @@
   }
 
   const filteredPostList = computed(() => {
-    return showMine.value ? postList.value.filter((post: object) => {
+    return showMine.value ? postList.value.filter((post: any) => {
       return post.count.toString() === cookie.account;
     }) : postList.value
   })
@@ -57,13 +58,14 @@
   <n-layout>
    <h1 id="ChatGround">话题广场</h1>
 <!--    提交-->
-    <div>
+ 
+      <n-space vertical id="input">
       <n-input v-model:value="title" placeholder="输入标题"/>
-      <n-input v-model:value="message" placeholder="输入内容"/>
+      <n-input v-model:value="message" placeholder="输入内容" type="textarea"/>
+      </n-space>
+      <n-space space-around>
       <n-button type="success" @click="sendPost">发送帖子</n-button>
-    </div>
-    <div>
-      <n-switch v-model:value="showMine">
+      <n-switch v-model:value="showMine" id="switch">
         <template #checked>
           只显示自己发布的内容
         </template>
@@ -71,10 +73,12 @@
           显示所有内容
         </template>
       </n-switch>
-    </div>
+      </n-space>
+
+
+
    <div v-for="post in filteredPostList">
      <post :data="post">
-
      </post>
    </div>
 
@@ -91,5 +95,14 @@ position: absolute;
 left: 12%;
 right: 0px;
 background-color: white;
+}
+
+#input{
+width: 30%;  
+}
+
+#switch{
+position: relative;
+top: 5px;
 }
 </style>

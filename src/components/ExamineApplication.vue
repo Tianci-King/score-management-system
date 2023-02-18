@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import { NSpace,NLayout,NButton,NTable,NInput} from 'naive-ui'
+  import { NSpace,NLayout,NButton,NTable,NInput,NGradientText } from 'naive-ui'
   import {ref,onMounted} from "vue";
   import updateAPI from '../apis/Examine/ApplicationUpdate';
   import deleteAPI from '../apis/Examine/ApplicationDel';
@@ -156,7 +156,9 @@
                <td>{{ Application.score_type }}</td>
                <td>{{ Application.score_reason }}</td>
                <td>{{ Application.time }}</td>
-               <td>{{ Application.state }}</td>
+               <td v-if="Application.state===0"><n-gradient-text type="error">未审批</n-gradient-text></td>
+               <td v-if="Application.state===1"><n-gradient-text type="success">已通过</n-gradient-text></td>
+               <td v-if="Application.state===2"><n-gradient-text type="warning">已驳回</n-gradient-text></td>
                <td>{{ Application.message }}</td>
                <td>{{ Application.advice }}</td>
                <td><n-button size="small" @click="onClickSelect(Application.id)">选择</n-button></td>

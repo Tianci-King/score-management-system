@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import { NSpace,NLayout,NButton,NTable,NInput,NSelect } from 'naive-ui'
+  import { NSpace,NLayout,NButton,NTable,NInput,NSelect,NGradientText } from 'naive-ui'
   import {ref,onMounted,isRef} from "vue";
   import updateAPI from '../apis/Examine/AppealUpdate';
   import deleteAPI from '../apis/Examine/AppealDel';
@@ -21,7 +21,7 @@
   let Excuses = <any>ref([]);//理由库获取的数据
   const newExcuse =ref('');
   const ExcuseId = ref();
-  
+
 
   const onClickExcuse =async()=>{
      const list = await ExcuseGet();
@@ -79,7 +79,6 @@
      state:1,
     });
     console.log(res);
-    stateChange();
   }  
   //Update1是通过申诉
 
@@ -91,7 +90,6 @@
      state:2,
     });
     console.log(res);
-    stateChange();
   }
   //Update2是驳回申诉
 
@@ -100,7 +98,6 @@
      id:id
      });
     console.log(res);
-    stateChange();
    } 
 
 
@@ -115,20 +112,6 @@
     return res.data;
   }
 
-  const stateChange = async ()=>{
-  const list = await getAppeals();
-  Appeals = list.data;
-  const change=()=>{  
-    for(let i=0;i<Appeals.length;i++)
-    {
-      if(Appeals[i].state===0){Appeals[i].state1="未审批"}
-      else{Appeals[i].state1="已审批"}
-      console.log(Appeals[i].state1)  
-    }
-  };
-  change();
-
-  }
 
   onMounted(
   async ()=>{
@@ -136,8 +119,6 @@
   Appeals.value = res.data;
   const res2 = await ExcuseGet();
   Excuses.value = res2.data;
-  stateChange();
-  console.log(Appeals)
   })
 
 </script>
@@ -169,7 +150,9 @@
                <td>{{ Appeal.appeal }}</td>
                <td>{{ Appeal.appeal_reason }}</td>
                <td>{{ Appeal.time }}</td>
-               <td>{{ Appeal.state1  }}</td>
+               <td v-if="Appeal.state===0"><n-gradient-text type="error">未审批</n-gradient-text></td>
+               <td v-if="Appeal.state===1"><n-gradient-text type="success">已通过</n-gradient-text></td>
+               <td v-if="Appeal.state===2"><n-gradient-text type="warning">已驳回</n-gradient-text></td>
                <td>{{ Appeal.advice }}</td>
                <td>{{ Appeal.message }}</td>
                <td><n-button size="small" @click="onClickSelect(Appeal.id)">选择</n-button></td>

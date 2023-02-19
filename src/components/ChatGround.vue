@@ -1,6 +1,6 @@
 <script setup lang="ts">
-  import { NSpace,NLayout,NInput,NSwitch,NButton,NIcon } from 'naive-ui'
-  import {computed, onMounted, ref} from "vue";
+  import { NSpace,NLayout,NInput,NSwitch,NButton,NIcon,NCard } from 'naive-ui'
+  import {computed, onMounted, ref,h} from "vue";
   import cookieStore from "../stores/cookieStore";
   import postService from "../apis/postService"
   import Post from "./post.vue";
@@ -12,6 +12,8 @@
   const message = ref();
   const cookie = cookieStore();
   const showMine = ref(false);
+
+
 
   function sendPost() {
      postService.postPost({
@@ -30,14 +32,16 @@
      }).catch((e) => {
        console.log(e);
      })
+     getPostItem();
   }
 
   const filteredPostList = computed(() => {
-    return showMine.value ? postList.value.filter((post: any) => {
+    return showMine.value ? postList.value.filter((post: object) => {
       return post.count.toString() === cookie.account;
     }) : postList.value
   })
-  onMounted( () => {
+
+  function getPostItem() {
     postService.getPosts({
       count: accountStore.account,
       mine: 0
@@ -50,20 +54,28 @@
         alert(res.data.msg);
     });
 
+  }
+
+  onMounted(() => {
+    getPostItem();
   })
 </script>
 
 <template>
 <n-space>
   <n-layout>
-   <h1 id="ChatGround">话题广场</h1>
+  <n-card id="chatGround">
+   <h1 id="h">话题广场</h1>
 <!--    提交-->
  
-      <n-space vertical id="input">
+      <n-space vertical >
+      <n-card  :bordered="false" >
       <n-input v-model:value="title" placeholder="输入标题"/>
       <n-input v-model:value="message" placeholder="输入内容" type="textarea"/>
+      </n-card>
       </n-space>
       <n-space space-around>
+       <n-card id="button" >
       <n-button type="success" @click="sendPost">发送帖子</n-button>
       <n-switch v-model:value="showMine" id="switch">
         <template #checked>
@@ -73,14 +85,16 @@
           显示所有内容
         </template>
       </n-switch>
+      </n-card>
       </n-space>
-
+  </n-card>
 
 
    <div v-for="post in filteredPostList">
-     <post :data="post">
-     </post>
+     <post :data="post" @change="getPostItem" />
    </div>
+
+
 
   </n-layout>
 </n-space>
@@ -90,19 +104,33 @@
 .n-layout{
 height:100%;
 width: auto;
-top: 80px;
+top: 100px;
 position: absolute;
-left: 12%;
+left: 20%;
 right: 0px;
 background-color: white;
 }
 
-#input{
-width: 30%;  
-}
 
 #switch{
 position: relative;
 top: 5px;
+left: 12px;
+}
+
+#chatGround{
+position: relative;
+width: 80%;
+}
+
+#h{
+position: relative;
+left: 40%;
+}
+
+#button{
+position: relative;
+left: 8%;
+text-align:center
 }
 </style>

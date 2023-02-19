@@ -23,16 +23,24 @@ teacherService.getSuggestion({
 onMounted(() => {
   getSuggestion()
 })
-
+const bordered = true;
+const hoverable = true;
 </script>
 
 <template>
   <n-space>
     <n-layout>
       <div v-if="suggestionList !== null" v-for="suggestion in suggestionList">
-        <n-card title="{{suggestion.question}}">
-          <template>
-              {{suggestion.account}}说 : {{suggestion.advice}}
+        <n-card
+            size="huge"
+            :bordered="bordered"
+            :hoverable="hoverable"
+        >
+          <template #header>
+            {{suggestion.question}}
+          </template>
+          <template #action>
+              {{suggestion.anonymity? "匿名用户" : suggestion.account}}说 : {{suggestion.advice}}
             </template>
         </n-card>
       </div>

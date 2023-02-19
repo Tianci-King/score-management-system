@@ -1,7 +1,6 @@
 <script setup lang="ts">
   import { NSpace,NLayout} from 'naive-ui'
-import { storeToRefs } from 'pinia';
-import internal from 'stream';
+  import { storeToRefs } from 'pinia';
   import studentService from "../apis/studentService";
   import cookieStore from '../stores/cookieStore';
 
@@ -14,7 +13,7 @@ import internal from 'stream';
   async function sendCom(){
     const data = {
       "count": account,
-      "year": formyear,
+      "year": parseInt(formyear),
       "appeal": formappeal,
       "appeal_reason": formappeal_reason,
     }

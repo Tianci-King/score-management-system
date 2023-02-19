@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import { NSpace,NLayout, formDark, NButton, NIcon, NP, NTable, NText, NUpload, NUploadDragger} from 'naive-ui';
+  import { NSpace,NLayout, formDark, NButton, NIcon, NP, NTable, NText, NUpload, NUploadDragger,NCard } from 'naive-ui';
   import cookieStore from '../stores/cookieStore';
   import { storeToRefs} from "pinia";
   import studentService from '../apis/studentService';
@@ -43,6 +43,7 @@
 <template>
 <n-space>
   <n-layout>
+  <n-card>
    <h1 id="Blank">申报</h1>
    <p>填写您需要申报的信息表单</p>
    <n-space vertical>
@@ -78,19 +79,22 @@
       </n-p>
     </n-upload-dragger>
   </n-upload>
-
+</n-card>
   </n-layout>
 </n-space>
 
-<n-space vertical>
+<n-space vertical> 
+
           <n-layout  class="shenbao">
             <h1>申报查询</h1>
           <n-space>
-            <n-button @click="getCom">申报查询</n-button>
+            <n-button @click="getCom" id="query">申报查询</n-button>
           </n-space>
           </n-layout>
+          
           <n-space>
             <n-layout class="form">
+            <n-card>
               <n-table>
                 <thead>
                   <tr>
@@ -115,7 +119,8 @@
                   </tr>
                 </tbody>
               </n-table>
-            </n-layout>
+             </n-card>
+            </n-layout>    
           </n-space>
           
         </n-space>
@@ -141,6 +146,11 @@ background-color: white;
 
 .shenbao {
   top:80px;
-  left:50%;
+  left:65%;
+}
+
+#query{
+  position: relative;
+  left: 45%;
 }
 </style>

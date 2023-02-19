@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import { NSpace,NLayout} from 'naive-ui'
+  import { NSpace,NLayout,NCard,NUpload} from 'naive-ui'
   import { storeToRefs } from 'pinia';
   import studentService from "../apis/studentService";
   import cookieStore from '../stores/cookieStore';
@@ -33,6 +33,7 @@
 <n-space>
   <n-space vertical>
   <n-layout>
+  <n-card>
    <h1 id="Complaints">申报提交</h1>
    <div>
     <p>申报文件</p>
@@ -58,11 +59,13 @@
       </n-p>
     </n-upload-dragger>
   </n-upload>
-
+  
    <n-space>
     <n-button @click="sendCom">提交申报</n-button>
    </n-space>
+   </n-card>
   </n-layout>
+
 </n-space>
 
 <n-space vertical>

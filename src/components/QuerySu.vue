@@ -1,5 +1,6 @@
 <script setup lang="ts">
   import { NSpace,NLayout,NButton,NCard} from 'naive-ui'
+  import {NGradientText} from "naive-ui";
   import {ref} from "vue";
   import studentService from "../apis/studentService";
   import {Score} from "../types/score";

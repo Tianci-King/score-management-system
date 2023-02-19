@@ -5,6 +5,9 @@
       :pagination="false"
       :columns="columns"
   ></n-data-table>
+  <n-gradient-text type="success">
+    总综测分 : {{total}}
+  </n-gradient-text>
 </template>
 
 <script setup lang="ts">
@@ -24,7 +27,6 @@ import {computed, ref} from "vue";
       key: "grade",
     }
   ];
-
 function getData(res: object): Score[]{
   let ansArr: Score[] = [];
   for(let item in res){
@@ -42,6 +44,9 @@ function getData(res: object): Score[]{
 const data = computed(() => {
    return getData(props.score);
 });
+const total = computed(() => {
+  return props.score.total;
+})
 </script>
 
 <style scoped>

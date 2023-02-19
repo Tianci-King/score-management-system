@@ -85,7 +85,6 @@
 
    <div v-for="post in filteredPostList">
      <post :data="post" @change="getPostItem" />
-     </post>
    </div>
 
   </n-layout>

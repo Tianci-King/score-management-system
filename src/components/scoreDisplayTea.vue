@@ -38,6 +38,7 @@ const columns = [
            },
            onBlur () {
              let maxNum = parseFloat(itemMsg[getName(item.name)].limit);
+             console.log("max" + maxNum);
              if(parseFloat(data.value[index].grade) > maxNum) alert("超出上限!");
              data.value[index].grade = Math.min(maxNum,parseFloat(data.value[index].grade));
              let i = index,j = index,sum = 0.0;

@@ -62,6 +62,7 @@ async function login(){
 
     console.log(res);
     piniaCookie.cookieIs(account.value);
+    piniaCookie.identityIs(res.data.data.identity.toString());
     alert("登陆成功")
     await router.push(res.data.data.identity.toString());
   }

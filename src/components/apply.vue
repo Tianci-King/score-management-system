@@ -61,7 +61,7 @@ import internal from 'stream';
     directory-dnd
     action="/api/student/apply"
     method="put"
-    data: forminfo
+    :data= forminfo
     :max="5"
   >
     <n-upload-dragger>

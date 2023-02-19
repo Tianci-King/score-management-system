@@ -8,6 +8,8 @@
   import getExcuseAPI from '../apis/Examine/ExcuseGet';
   import updateExcuseAPI from '../apis/Examine/ExcuseUpdate';
   import deleteExcuseAPI from '../apis/Examine/ExcuseDel';
+  import addressAPI from '../apis/Examine/AddressGet';
+import { id } from 'date-fns/locale';
   const piniaCookie = cookieStore();
   const account = piniaCookie.account 
   const message = ref("");
@@ -19,11 +21,16 @@
   const selectedId = ref(); 
   let Applications = <any>ref([]);//获取的数据
   let Excuses = <any>ref([]);//理由库获取的数据
+
   const newExcuse =ref('');
   const ExcuseId = ref();
   
+  const onClickPatch= (Address:any)=>{
+    window.location.href=Address;
+  }
 
   const onClickExcuse =async()=>{
+     
      const list = await ExcuseGet();
      Excuses = list.data
      const findLabel = ()=>{
@@ -143,6 +150,7 @@
              <th>申报学科</th>
              <th>申报原因</th>
              <th>申报时间</th>
+             <th>申报附件</th>
              <th>审批状态</th>
              <th>审批理由</th>
              <th>审批建议</th>
@@ -156,6 +164,7 @@
                <td>{{ Application.score_type }}</td>
                <td>{{ Application.score_reason }}</td>
                <td>{{ Application.time }}</td>
+               <td><n-button @click="onClickPatch(Application.address)">获取附件</n-button></td>
                <td v-if="Application.state===0"><n-gradient-text type="error">未审批</n-gradient-text></td>
                <td v-if="Application.state===1"><n-gradient-text type="success">已通过</n-gradient-text></td>
                <td v-if="Application.state===2"><n-gradient-text type="warning">已驳回</n-gradient-text></td>

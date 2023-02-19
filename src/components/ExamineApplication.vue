@@ -1,15 +1,16 @@
 <script setup lang="ts">
-  import { NSpace,NLayout,NButton,NTable,NInput,NGradientText } from 'naive-ui'
+  import { NSpace,NLayout,NButton,NTable,NInput,NGradientText,NDatePicker } from 'naive-ui'
   import {ref,onMounted} from "vue";
   import updateAPI from '../apis/Examine/ApplicationUpdate';
   import deleteAPI from '../apis/Examine/ApplicationDel';
   import getAPI from '../apis/Examine/ApplicationGet';
+  import timeAPI from '../apis/Examine/TimeAPI';
   import cookieStore from '../stores/cookieStore';
   import getExcuseAPI from '../apis/Examine/ExcuseGet';
   import updateExcuseAPI from '../apis/Examine/ExcuseUpdate';
   import deleteExcuseAPI from '../apis/Examine/ExcuseDel';
-  import addressAPI from '../apis/Examine/AddressGet';
-import { id } from 'date-fns/locale';
+ 
+
   const piniaCookie = cookieStore();
   const account = piniaCookie.account 
   const message = ref("");
@@ -19,6 +20,11 @@ import { id } from 'date-fns/locale';
   const Application3 = {score:"3",score_reason:"3",score_type:"d21",time:'2007.06.30 12:08:55',state:0,id:3}
   const ApplicationTest =[Application1,Application2,Application3]   //测试使用
   const selectedId = ref(); 
+
+  const start_time = ref('2023-02-10 12:08:55');
+  const end_time = ref('2023-09-30 12:08:55');
+
+
   let Applications = <any>ref([]);//获取的数据
   let Excuses = <any>ref([]);//理由库获取的数据
 
@@ -114,6 +120,16 @@ import { id } from 'date-fns/locale';
    } 
 
 
+  const onClickTime = async()=>{
+    const res = await timeAPI({
+      start_time:start_time,
+      end_time:end_time,
+      count:account
+    });
+    console.log(res);
+  }
+
+
   const getApplications = async () =>{
     const res = await getAPI({
       account:account
@@ -122,6 +138,8 @@ import { id } from 'date-fns/locale';
     console.log("获取申报数据成功"); 
     return res.data;
   }
+  
+
 
 
   onMounted(
@@ -214,7 +232,25 @@ import { id } from 'date-fns/locale';
         ></n-input>
         <n-button @click="onClickExcuseUpdate">新建</n-button>
        </n-space>
+    
+       <n-space>
+        <h4>申报递交时间设置：</h4>
+        <n-date-picker
+        v-model:formatted-value="start_time"
+        value-format="yyyy-MM-dd HH:mm:ss"
+        type="datetime"
+        clearable
+        />
 
+        <n-date-picker
+        v-model:formatted-value="end_time"
+        value-format="yyyy-MM-dd HH:mm:ss"
+        type="datetime"
+        clearable
+        />
+        <n-button @click="onClickTime()">递交</n-button>
+
+       </n-space>
   </n-space>
 
   </n-layout>

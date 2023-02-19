@@ -31,7 +31,7 @@ const menuOptions: MenuOption[] = [
                 }
               }
             },
-            { default: () => '管理学生' }
+            { default: () => '管理辅导员' }
         ),
     key: 'adminTea',
     icon: renderIcon(ComplaintsIcon),
@@ -51,7 +51,7 @@ const menuOptions: MenuOption[] = [
             { default: () => '管理学生' }
         ),
     key: 'adminStu',
-    icon: renderIcon(ExitIcon),
+    icon: renderIcon(ComplaintsIcon),
   },
   {
     label: () =>

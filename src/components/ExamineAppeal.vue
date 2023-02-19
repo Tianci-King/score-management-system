@@ -25,7 +25,7 @@
 
   const onClickExcuse =async()=>{
      const list = await ExcuseGet();
-     Excuses.value = list.data
+     Excuses = list.data
      const findLabel = ()=>{
      for (let i = 0 ; i<Excuses.length ; i++) {
       if(Excuses[i].value === ExcuseId.value ) 

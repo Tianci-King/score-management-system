@@ -12,11 +12,10 @@
      onSuccess.value = false
      const data = {
        "account": account.value.toString(),
-       "year": year.value,
+       "year": parseInt(year.value),
      }
      const res = await studentService.queryScore(data);
      if (res.data.msg === "OK") {
-       console.log(res.data.data);
        resData.value = res.data.data;
        onSuccess.value = true;
      } else {

@@ -23,7 +23,6 @@
 <script lang="ts" setup>
 import {computed, ref} from "vue";
 import cookieStore from "../stores/cookieStore";
-import postService from "../apis/postService";
 import commentService from "../apis/commentService";
 
 const cookie = cookieStore();
@@ -31,6 +30,7 @@ const onEdit = ref<Boolean>(false);
 const props = defineProps({
   'data': Object
 });
+const emit = defineEmits(['change']);
 
 function edit() {
   if(onEdit.value === false) {
@@ -63,6 +63,7 @@ function deleteComment() {
       alert(res.data.msg);
     }
   })
+  emit('change');
 }
 
 const commentData = computed(() => {

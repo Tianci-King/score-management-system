@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import { NSpace,NLayout,NButton,NTable,NInput,NGradientText,NDatePicker } from 'naive-ui'
+  import { NSpace,NLayout,NButton,NTable,NInput,NGradientText,NDatePicker,NCard } from 'naive-ui'
   import {ref,onMounted} from "vue";
   import updateAPI from '../apis/Examine/ApplicationUpdate';
   import deleteAPI from '../apis/Examine/ApplicationDel';
@@ -197,7 +197,7 @@
 
      
        <n-space vertical>
-          <h2>审批栏</h2>
+          <h2 id="title">审批栏</h2>
           <n-space>
             <n-input disabled placeholder="选中的申报序号:" id="h2"></n-input>
             <p>{{ selectedId }}</p>
@@ -234,6 +234,7 @@
        </n-space>
     
        <n-space>
+        <n-card id="time">
         <h4>申报递交时间设置：</h4>
         <n-date-picker
         v-model:formatted-value="start_time"
@@ -249,7 +250,7 @@
         clearable
         />
         <n-button @click="onClickTime()">递交</n-button>
-
+        </n-card>
        </n-space>
   </n-space>
 
@@ -270,5 +271,15 @@ background-color: white;
 
 #h2{
   width: 125px;
+}
+
+#Examine{
+  position: relative;
+  left: 40%;
+}
+
+#time{
+  position: relative;
+  top: 25%;
 }
 </style>

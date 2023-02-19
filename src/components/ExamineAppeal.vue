@@ -221,4 +221,9 @@ background-color: white;
 #h2{
   width: 125px;
 }
+
+#Examine{
+  position: relative;
+  left: 40%;
+}
 </style>

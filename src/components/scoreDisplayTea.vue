@@ -15,7 +15,7 @@ import {itemMsg} from "../constants/itemMsg";
 import {computed, ref,h} from "vue";
 import {NInput} from "naive-ui";
 import teacherService from "../apis/teacherServeice";
-
+import {NButton} from "naive-ui";
 const props = defineProps({
   "res": []
 })
@@ -29,16 +29,36 @@ const columns = [
     title: "分数",
     key: "grade",
     render (item,index) {
+      if (containsNumber(getName(item.name)))
       return h(NInput,{
-           value: item.grade,
-           onUpdateValue (v) {
-             let maxNum = itemMsg[getName(item.name)].limit;
-             if(parseInt(v) > maxNum) alert("超出上限!");
-             flash.value = true;
-             data.value[index].grade = Math.min(maxNum,parseInt(v));
-             flash.value = false;
+           value: item.grade.toString(),
+           onUpdateValue (v: string) {
+             if (v === "") v = "0";
+             data.value[index].grade = v;
+           },
+           onBlur () {
+             let maxNum = parseFloat(itemMsg[getName(item.name)].limit);
+             console.log("max" + maxNum);
+             if(parseFloat(data.value[index].grade) > maxNum) alert("超出上限!");
+             data.value[index].grade = Math.min(maxNum,parseFloat(data.value[index].grade));
+             let i = index,j = index,sum = 0.0;
+             while(containsNumber(getName(data.value[i].name))) i--;
+             while(containsNumber(getName(data.value[j].name))) j++;
+             console.log(i,j);
+             for(let k = i + 1 ; k < j ; k ++  ){
+               sum += parseFloat(data.value[k].grade);
+               console.log(sum);
+             }
+             console.log(sum);
+             data.value[i].grade = sum.toString();
+             console.log(data.value[i].grade + "结果");
            }
       })
+      else
+        return h(NInput,{
+            value: item.grade,
+            disabled: true,
+        })
     }
   }
 ];
@@ -69,11 +89,9 @@ async function sendChange() {
 
     console.log(score);
     for(let i in data.value){
-       score[getName(data.value[i].name)] = parseInt(data.value[i].grade);
+       score[getName(data.value[i].name)] = parseFloat(data.value[i].grade);
     }
     console.log(score);
-    //FIXME: 这里两个log输出都是一样的 并不是进行修改的for循环没有用，应该是js执行顺序的问题
-
     const res =  await teacherService.postScore(score);
     if(res.data.msg === "OK")
       alert("提交成功!");
@@ -85,6 +103,10 @@ function getName(name: string) {
     if(itemMsg[item].name === name)
       return item;
   }
+}
+function containsNumber(str: string) {
+  const reg=/\d/;
+  return reg.test(str);
 }
 
 </script>

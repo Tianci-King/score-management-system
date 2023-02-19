@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import { NSpace,NLayout} from 'naive-ui'
+  import { NSpace,NLayout,NButton,NCard,NInput } from 'naive-ui'
   import {ref} from "vue";
   import cookieStore from "../stores/cookieStore";
   import teacherService from "../apis/teacherServeice";
@@ -13,9 +13,9 @@
   async function query() {
     onSuccess.value = false;
     const res = await teacherService.queryScore({
-       "tacount": cookie.account.toString(),
-       "sacount": account.value,
-        "year": year.value,
+       "tcount": cookie.account.toString(),
+       "scount": account.value,
+        "year": parseInt(year.value),
     })
     if(res.data.msg === "OK"){
         resData.value = res.data.data;
@@ -25,12 +25,14 @@
       alert(res.data.msg)
     }
   }
-
+  //TODO: 分数项大象自动计算 话题广场自动刷新 建议修改页面显示 申报时间 match管理 审批申诉状态显示数据
 </script>
 
 <template>
 <n-space>
   <n-layout>
+  <n-space vertical>
+    <n-card id="card">
     <h1 id="Query">成绩管理</h1>
     <div>
       <n-input  round placeholder="学号"
@@ -42,6 +44,8 @@
     </div>
     <n-button class="button1" @click="query">查找</n-button>
     <score-display-tea v-if="onSuccess" :res="resData"></score-display-tea>
+    </n-card>
+  </n-space>
   </n-layout>
 </n-space>
 </template>
@@ -62,4 +66,13 @@ background-color: white;
 .account{
   width: 200px;
 }
+
+#card{
+  width: 20%;
+  left: 300px;
+  top: 50px;
+}
 </style>
+
+
+

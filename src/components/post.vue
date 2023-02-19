@@ -26,10 +26,10 @@
          删除
        </n-button>
      </div>
-     <n-button @click="getComment">{{showComment? "收起评论" : "展开评论"}}</n-button>
+     <n-button @click="displayComment">{{showComment? "收起评论" : "展开评论"}}</n-button>
      <template v-if="showComment" #footer>
          <div v-if="showComment" v-for="comment in commentData">
-           <comment :data="comment"/>
+           <comment :data="comment" @change="getComment"/>
          </div>
          <div>
            <n-input v-model:value="msg" placeholder="输入评论内容"/>
@@ -56,6 +56,7 @@ const props = defineProps({
   'data': Object
 });
 const onEdit = ref<Boolean>(false)
+const emit = defineEmits(['change']);
 
 function edit() {
   if(onEdit.value === false) {
@@ -89,23 +90,12 @@ function edit() {
         alert(res.data.msg);
       }
     })
+    emit('change');
   }
 
-  function getComment() {
+  function displayComment() {
     if (showComment.value === false)
-    commentService.getComments({
-      id: postData.value.id,
-    }).then((res) => {
-      if(res.data.msg === "OK") {
-        commentData.value = res.data.data;
-        showComment.value = true;
-      }
-      else {
-        showComment.value = false
-        alert(res.data.msg);
-
-      }
-    })
+     getComment();
     else
     showComment.value = !showComment.value;
   }
@@ -126,8 +116,23 @@ function edit() {
     }).catch((e) => {
       console.log(e);
     })
+    getComment();
   }
 
+  function getComment() {
+    commentService.getComments({
+      id: postData.value.id,
+    }).then((res) => {
+      if(res.data.msg === "OK") {
+        commentData.value = res.data.data;
+        showComment.value = true;
+      }
+      else {
+        showComment.value = false
+        alert(res.data.msg);
+      }
+    })
+  }
 
 const postData  = computed(() => {
   return props.data;

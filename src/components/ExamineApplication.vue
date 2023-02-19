@@ -156,7 +156,9 @@
 
   
   <n-layout id="layout1">
+  <n-card>
      <h1 id="Examine">审批申报</h1>
+
   <n-space>
         <n-space vertical>    
         <h2>申报栏</h2>
@@ -253,7 +255,7 @@
         </n-card>
        </n-space>
   </n-space>
-
+  </n-card>
   </n-layout>
   
 </template>

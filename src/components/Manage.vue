@@ -42,7 +42,7 @@
       <n-input round placeholder="年份"
                class="year" v-model:value="year"/>
     </div>
-    <n-button class="button1" @click="query">查找</n-button>
+    <n-button id="button" @click="query" round>查找</n-button>
     <score-display-tea v-if="onSuccess" :res="resData"></score-display-tea>
     </n-card>
   </n-space>
@@ -61,6 +61,7 @@ right: 0px;
 background-color: white;
 }
 .year{
+  top: 3px;
   width: 200px;
 }
 .account{
@@ -71,6 +72,10 @@ background-color: white;
   width: 20%;
   left: 300px;
   top: 50px;
+}
+
+#button{
+  top: 5px;
 }
 </style>
 

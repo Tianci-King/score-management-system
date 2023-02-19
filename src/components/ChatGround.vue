@@ -120,9 +120,9 @@
             </n-tag>
           </n-space>
         </template>
-        1:dapjkdoawjpodj<br>
-        2:fwqaiojfpoa[jf]<br>
-        3:dfwpofjkawpjf<br>
+        1:分差不低于0.5<br>
+        2:分数登记不超过三天<br>
+        3:申报分数需要文件上传辅助证明<br>
       </n-thing>
       <template #footer>
         <n-thing  content-style="margin-top: 10px;" >
@@ -138,9 +138,9 @@
             </n-tag>
           </n-space>
         </template>
-        1:fqwjljfpqj<br>
-        2:djaldjaojdoajod<br>
-        3:dapdkoawpodjkpwaj<br>
+        1:科学素养<br>
+        2:社会责任<br>
+        3:国际视野
       </n-thing>
       </template>
     </n-card>

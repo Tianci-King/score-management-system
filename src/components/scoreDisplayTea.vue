@@ -87,11 +87,10 @@ function isPower(num: number,res: object){
 async function sendChange() {
   let score = props.res.score;
 
-    console.log(score);
     for(let i in data.value){
        score[getName(data.value[i].name)] = parseFloat(data.value[i].grade);
     }
-    console.log(score);
+    console.log(JSON.stringify(score) + "处理之后的score");
     const res =  await teacherService.postScore(score);
     if(res.data.msg === "OK")
       alert("提交成功!");

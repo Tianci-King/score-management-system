@@ -9,7 +9,8 @@
   import getExcuseAPI from '../apis/Examine/ExcuseGet';
   import updateExcuseAPI from '../apis/Examine/ExcuseUpdate';
   import deleteExcuseAPI from '../apis/Examine/ExcuseDel';
- 
+  import {itemMsg} from "../constants/itemMsg";
+
 
   const piniaCookie = cookieStore();
   const account = piniaCookie.account 
@@ -122,13 +123,16 @@
 
   const onClickTime = async()=>{
     const res = await timeAPI({
-      start_time:start_time,
-      end_time:end_time,
+      start_time:start_time.value,
+      end_time:end_time.value,
       count:account
     });
+    if(res.data.msg === "OK")
+       alert("设置成功!");
+    else
+      alert(res.data.msg);
     console.log(res);
   }
-
 
   const getApplications = async () =>{
     const res = await getAPI({
@@ -179,7 +183,7 @@
              <tr v-for="Application in Applications">
                <td>{{ Application.id }}</td>
                <td>{{ Application.score }}</td>
-               <td>{{ Application.score_type }}</td>
+               <td>{{ itemMsg[Application.score_type].name }}</td>
                <td>{{ Application.score_reason }}</td>
                <td>{{ Application.time }}</td>
                <td><n-button @click="onClickPatch(Application.address)">获取附件</n-button></td>

@@ -22,6 +22,7 @@ const addData = ref({
 const formData = ref();
 function getStudentItem () {
   adminService.getStudent().then((res) => {
+    console.log(res.data.msg);
     if(res.data.msg === "OK")
       formData.value = res.data.data;
     else

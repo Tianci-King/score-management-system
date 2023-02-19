@@ -6,6 +6,7 @@ const cookieStore = defineStore("account",() => {
     const cookieIs = (tmp: string) => {
         cookie.value = "account="+tmp;
         account.value = tmp;
+        localStorage.setItem("account",account.value);
     }
 
     return {

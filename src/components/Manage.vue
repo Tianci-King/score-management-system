@@ -25,7 +25,7 @@
       alert(res.data.msg)
     }
   }
-  //TODO: 申报时间 match管理 审批申诉状态显示数据
+  //TODO: 分数项大象自动计算 话题广场自动刷新 建议修改页面显示 申报时间 match管理 审批申诉状态显示数据
 </script>
 
 <template>

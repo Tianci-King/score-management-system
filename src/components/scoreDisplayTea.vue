@@ -31,20 +31,26 @@ const columns = [
     render (item,index) {
       if (containsNumber(getName(item.name)))
       return h(NInput,{
-           value: item.grade,
-           onUpdateValue (v) {
-             if (v === "") v = 0;
-             let oldValue = data.value[index].grade;
-             let maxNum = itemMsg[getName(item.name)].limit;
-             if(parseInt(v) > maxNum) alert("超出上限!");
-             flash.value = true;
-             data.value[index].grade = Math.min(maxNum,parseInt(v));
-             flash.value = false;
-             let i = index;
+           value: item.grade.toString(),
+           onUpdateValue (v: string) {
+             if (v === "") v = "0";
+             data.value[index].grade = v;
+           },
+           onBlur () {
+             let maxNum = parseFloat(itemMsg[getName(item.name)].limit);
+             if(parseFloat(data.value[index].grade) > maxNum) alert("超出上限!");
+             data.value[index].grade = Math.min(maxNum,parseFloat(data.value[index].grade));
+             let i = index,j = index,sum = 0.0;
              while(containsNumber(getName(data.value[i].name))) i--;
-             console.log(i,index);
-             data.value[i].grade += Math.min(maxNum,parseInt(v)) - oldValue;
-             console.log(data.value[i].grade);
+             while(containsNumber(getName(data.value[j].name))) j++;
+             console.log(i,j);
+             for(let k = i + 1 ; k < j ; k ++  ){
+               sum += parseFloat(data.value[k].grade);
+               console.log(sum);
+             }
+             console.log(sum);
+             data.value[i].grade = sum.toString();
+             console.log(data.value[i].grade + "结果");
            }
       })
       else
@@ -82,7 +88,7 @@ async function sendChange() {
 
     console.log(score);
     for(let i in data.value){
-       score[getName(data.value[i].name)] = parseInt(data.value[i].grade);
+       score[getName(data.value[i].name)] = parseFloat(data.value[i].grade);
     }
     console.log(score);
     const res =  await teacherService.postScore(score);

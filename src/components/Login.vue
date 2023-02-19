@@ -45,6 +45,7 @@ import {ref} from "vue";
 import loginApi from "../apis/utils/login";
 import cookieStore from "../stores/cookieStore";
 import router from "../routers";
+import { storeToRefs } from 'pinia';
 
 const account = ref("");
 const password = ref("");
@@ -62,7 +63,8 @@ async function login(){
 
     console.log(res);
     piniaCookie.cookieIs(account.value);
-    alert("登陆成功")
+    piniaCookie.timeIs(res.data.data.start_time,res.data.data.end_time);
+    alert("登陆成功");
     await router.push(res.data.data.identity.toString());
   }
   else {

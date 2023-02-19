@@ -1,6 +1,6 @@
 <template>
  
-   <n-card
+   <n-card id="card"
      :segmented="{
       content: true,
       footer: 'soft'
@@ -18,7 +18,7 @@
        {{postData.message}}
      </div>
      <n-input v-else v-model:value="postData.message"/>
-     <div class="button" v-if="isMine">
+     <div class="button" v-if="isMine"> 
        <n-button  type="info" @click="edit" >
          {{onEdit? "完成编辑" : "编辑"}}
        </n-button>
@@ -143,5 +143,8 @@ const isMine = computed(() => {
 </script>
 
 <style scoped>
-
+#card{
+  position: relative;
+  width: 80%;
+}
 </style>

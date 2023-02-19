@@ -1,13 +1,13 @@
 <script setup lang="ts">
-  import { NSpace,NLayout,NButton,NTable,NInput,NSelect } from 'naive-ui'
-  import {ref,onMounted} from "vue";
+  import { NSpace,NLayout,NButton,NTable,NInput,NSelect,NGradientText } from 'naive-ui'
+  import {ref,onMounted,isRef} from "vue";
   import updateAPI from '../apis/Examine/AppealUpdate';
   import deleteAPI from '../apis/Examine/AppealDel';
   import getAPI from '../apis/Examine/AppealGet';
   import cookieStore from '../stores/cookieStore';
-  import getExcuseAPI from '../apis/Excuse/ExcuseGet';
-  import updateExcuseAPI from '../apis/Excuse/ExcuseUpdate';
-  import deleteExcuseAPI from '../apis/Excuse/ExcuseDel';
+  import getExcuseAPI from '../apis/Examine/ExcuseGet';
+  import updateExcuseAPI from '../apis/Examine/ExcuseUpdate';
+  import deleteExcuseAPI from '../apis/Examine/ExcuseDel';
   const piniaCookie = cookieStore();
   const account = piniaCookie.account 
   const message = ref("");
@@ -20,29 +20,28 @@
   let Appeals = <any>ref([]);//获取的数据
   let Excuses = <any>ref([]);//理由库获取的数据
   const newExcuse =ref('');
-  const Excuse = ref('');
   const ExcuseId = ref();
 
-  
-  
-  const onClickExcuse =()=>{
-   const findLabel = ()=>{
-   for (let i = 0 ; i<Excuses.length ; i++) {
-   if(Excuses[i].value === ExcuseId.value) {
-   Excuse.value = Excuses[i].label;
+
+  const onClickExcuse =async()=>{
+     const list = await ExcuseGet();
+     Excuses = list.data
+     const findLabel = ()=>{
+     for (let i = 0 ; i<Excuses.length ; i++) {
+      if(Excuses[i].value === ExcuseId.value ) 
+       {message.value = Excuses[i].label;}
+      }
     }
-   }
+    findLabel();
   }
-   findLabel();
-   message.value = Excuse.value;
-  }//理由库的使用
+ //理由库的使用
 
   const ExcuseGet = async()=>{
     const res = await getExcuseAPI({
-    account:account
+    count:account
     })
     console.log(res);
-    console.log("获取理由库数据成功"); 
+    console.log("获取理由库数据成功");
     return res.data;
   }
 
@@ -80,8 +79,6 @@
      state:1,
     });
     console.log(res);
-    const list = await getAppeals();
-    Appeals.value = list.data;
   }  
   //Update1是通过申诉
 
@@ -93,8 +90,6 @@
      state:2,
     });
     console.log(res);
-    const list = await getAppeals();
-    Appeals.value = list.data;
   }
   //Update2是驳回申诉
 
@@ -103,8 +98,6 @@
      id:id
      });
     console.log(res);
-    const list = await getAppeals();
-    Appeals.value = list.data;
    } 
 
 
@@ -120,14 +113,13 @@
   }
 
 
-
-onMounted(
+  onMounted(
   async ()=>{
   const res = await getAppeals();
   Appeals.value = res.data;
-  const res2 = await getExcuseAPI();
+  const res2 = await ExcuseGet();
   Excuses.value = res2.data;
-})
+  })
 
 </script>
  
@@ -158,7 +150,9 @@ onMounted(
                <td>{{ Appeal.appeal }}</td>
                <td>{{ Appeal.appeal_reason }}</td>
                <td>{{ Appeal.time }}</td>
-               <td>{{ Appeal.state }}</td>
+               <td v-if="Appeal.state===0"><n-gradient-text type="error">未审批</n-gradient-text></td>
+               <td v-if="Appeal.state===1"><n-gradient-text type="success">已通过</n-gradient-text></td>
+               <td v-if="Appeal.state===2"><n-gradient-text type="warning">已驳回</n-gradient-text></td>
                <td>{{ Appeal.advice }}</td>
                <td>{{ Appeal.message }}</td>
                <td><n-button size="small" @click="onClickSelect(Appeal.id)">选择</n-button></td>

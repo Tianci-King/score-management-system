@@ -1,5 +1,7 @@
 <template>
-  <n-menu :options="menuOptions"/>
+
+  <n-menu :options="menuOptions"   id="menu"/>
+
 </template>
 
 <script setup lang="ts">
@@ -13,7 +15,8 @@ import {
   ExitOutline as ExitIcon,
   ChatbubbleEllipsesOutline as ChatGroundIcon,
   NewspaperOutline as ManageIcon,
-  ReceiptOutline as ExamineIcon
+  ReceiptOutline as ExamineIcon,
+  MailOutline as MailBoxIcon,
 } from '@vicons/ionicons5'
 import { RouterLink } from 'vue-router'
 
@@ -93,20 +96,20 @@ const menuOptions: MenuOption[] = [
   },
   {
     label: () =>
-      h(
-        RouterLink,
-        {
-          to: {
-            name: 'Change2',
-            params: {
-              lang: 'zh-CN'
-            }
-          }
-        },
-        { default: () => '修改密码' }
-      ),
-    key: 'Change-Password',
-    icon: renderIcon(PencilIcon),
+        h(
+            RouterLink,
+            {
+              to: {
+                name: 'Suggestion',
+                params: {
+                  lang: 'zh-CN'
+                }
+              }
+            },
+            { default: () => '建议箱' }
+        ),
+    key: 'suggestionGet',
+    icon: renderIcon(MailBoxIcon),
   },
   {
     label: () =>
@@ -126,23 +129,6 @@ const menuOptions: MenuOption[] = [
     icon: renderIcon(ExitIcon),
   },
   {
-    label: () =>
-        h(
-            RouterLink,
-            {
-              to: {
-                name: 'Suggestion',
-                params: {
-                  lang: 'zh-CN'
-                }
-              }
-            },
-            { default: () => '建议箱' }
-        ),
-    key: 'suggestionGet',
-    icon: renderIcon(ExitIcon),
-  },
-  {
     label: '待定',
     key: 'undefined',
     disabled: true,
@@ -156,14 +142,13 @@ const menuOptions: MenuOption[] = [
 .n-menu{
   background-color: white;
     height:100%;
-    HEAD:src/components/Menu.vue;
     position: fixed;
     width:16%;
-    position: absolute;
     width:12%;
-    UI:src/components/TeacherMenu.vue;
     left: 0%;
     top:80px;
 }
+
+
 </style>
 

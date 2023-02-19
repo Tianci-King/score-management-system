@@ -1,13 +1,15 @@
 <script setup lang="ts">
-  import { NSpace,NLayout,NButton,NTable,NInput} from 'naive-ui'
+  import { NSpace,NLayout,NButton,NTable,NInput,NGradientText } from 'naive-ui'
   import {ref,onMounted} from "vue";
   import updateAPI from '../apis/Examine/ApplicationUpdate';
   import deleteAPI from '../apis/Examine/ApplicationDel';
   import getAPI from '../apis/Examine/ApplicationGet';
   import cookieStore from '../stores/cookieStore';
-  import getExcuseAPI from '../apis/Excuse/ExcuseGet';
-  import updateExcuseAPI from '../apis/Excuse/ExcuseUpdate';
-  import deleteExcuseAPI from '../apis/Excuse/ExcuseDel';
+  import getExcuseAPI from '../apis/Examine/ExcuseGet';
+  import updateExcuseAPI from '../apis/Examine/ExcuseUpdate';
+  import deleteExcuseAPI from '../apis/Examine/ExcuseDel';
+  import addressAPI from '../apis/Examine/AddressGet';
+import { id } from 'date-fns/locale';
   const piniaCookie = cookieStore();
   const account = piniaCookie.account 
   const message = ref("");
@@ -18,29 +20,31 @@
   const ApplicationTest =[Application1,Application2,Application3]   //测试使用
   const selectedId = ref(); 
   let Applications = <any>ref([]);//获取的数据
-   
-  const Excuses = <any>ref([]);//理由库获取的数据
+  let Excuses = <any>ref([]);//理由库获取的数据
 
   const newExcuse =ref('');
-  const Excuse = ref('');
   const ExcuseId = ref();
   
-  
-  const onClickExcuse =()=>{
-   const findLabel = ()=>{
-   for (let i = 0 ; i<Excuses.length ; i++) {
-   if(Excuses[i].value === ExcuseId.value) {
-   Excuse.value = Excuses[i].label;
-    }
-   }
+  const onClickPatch= (Address:any)=>{
+    window.location.href=Address;
   }
-   findLabel();
-   message.value = Excuse.value;
+
+  const onClickExcuse =async()=>{
+     
+     const list = await ExcuseGet();
+     Excuses = list.data
+     const findLabel = ()=>{
+     for (let i = 0 ; i<Excuses.length ; i++) {
+      if(Excuses[i].value === ExcuseId.value ) 
+       {message.value = Excuses[i].label;}
+      }
+    }
+    findLabel();
   }//理由库的使用
 
   const ExcuseGet = async()=>{
     const res = await getExcuseAPI({
-    account:account
+    count:account
     })
     console.log(res);
     console.log("获取理由库数据成功"); 
@@ -124,7 +128,7 @@
   async ()=>{
   const res = await getApplications();
   Applications.value = res.data;
-  const res2 = await getExcuseAPI();
+  const res2 = await ExcuseGet();
   Excuses.value = res2.data;
 })
 
@@ -146,6 +150,7 @@
              <th>申报学科</th>
              <th>申报原因</th>
              <th>申报时间</th>
+             <th>申报附件</th>
              <th>审批状态</th>
              <th>审批理由</th>
              <th>审批建议</th>
@@ -159,7 +164,10 @@
                <td>{{ Application.score_type }}</td>
                <td>{{ Application.score_reason }}</td>
                <td>{{ Application.time }}</td>
-               <td>{{ Application.state }}</td>
+               <td><n-button @click="onClickPatch(Application.address)">获取附件</n-button></td>
+               <td v-if="Application.state===0"><n-gradient-text type="error">未审批</n-gradient-text></td>
+               <td v-if="Application.state===1"><n-gradient-text type="success">已通过</n-gradient-text></td>
+               <td v-if="Application.state===2"><n-gradient-text type="warning">已驳回</n-gradient-text></td>
                <td>{{ Application.message }}</td>
                <td>{{ Application.advice }}</td>
                <td><n-button size="small" @click="onClickSelect(Application.id)">选择</n-button></td>

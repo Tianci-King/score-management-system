@@ -1,4 +1,5 @@
 <template>
+ 
    <n-card
      :segmented="{
       content: true,
@@ -36,10 +37,12 @@
          </div>
      </template>
    </n-card>
+
 </template>
 
 <script lang="ts" setup>
 import {computed, onMounted, ref} from "vue";
+import { NSpace,NLayout,NInput,NSwitch,NButton,NIcon,NCard } from 'naive-ui'
 import cookieStore from "../stores/cookieStore";
 import postService from "../apis/postService";
 import commentService from "../apis/commentService";

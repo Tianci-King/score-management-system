@@ -13,7 +13,7 @@ export default class studentService {
         })
     }
 
-    static async queryApply(account: Ref<string>) {
+    static async queryAppeal(account: string) {
         return request({
             "method": "post",
             "url": "/api/student/queryappeal",
@@ -58,10 +58,11 @@ export default class studentService {
             }
         })
     }
-    static async getComplaint(account: string) {
+
+    static async queryApply(account: string) {
         return request({
             "method": "post",
-            "url": "/api/student/queryappeal",
+            "url": "/api/student/queryapply",
             "headers": {
                 'Content-Type': 'application/json',
             },

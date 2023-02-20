@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { NSpace, NLayout } from 'naive-ui'
+import { NSpace, NLayout,NCard,NButton } from 'naive-ui'
 import { storeToRefs } from 'pinia';
 import internal from 'stream';
 import studentService from "../apis/studentService";
@@ -52,6 +52,7 @@ async function getCom() {
   <n-space vertical>
     <n-space vertical>
       <n-layout>
+    
         <h1 id="Complaints">申诉提交</h1>
         <div>
           <n-space vertical>
@@ -70,6 +71,7 @@ async function getCom() {
         <br /> <br /> <br /> <br />
 
         <n-space vertical>
+         
           <h1>申诉查询</h1>
           <n-space>
             <n-button @click="getCom">申诉查询</n-button>

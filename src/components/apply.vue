@@ -73,70 +73,89 @@ onMounted(() => {
 </script>
 
 <template>
-  <n-space>
-    <n-layout>
-      <h1 id="Blank">申报</h1>
-      <p>请先填写您需要申报的信息表单</p>
-      <n-space vertical>
-        <n-input placeholder="所要申报内容的学年" v-model:value="formyear" autosize style="min-width: 90%"></n-input>
-        <n-input placeholder="所要申报的项目类型" v-model:value="formscoretype" autosize style="min-width: 90%"
-                 size="large"></n-input>
-        <n-input placeholder="申报分数" v-model:value="formscore" autosize style="min-width: 90%" size="large"></n-input>
-        <n-input placeholder="申报理由" v-model:value="formscoreres" autosize style="min-width: 90%" size="large"></n-input>
-      </n-space>
-      <br />
+<n-space>
+  <n-layout>
+  <n-card>
+   <h1 id="Blank">申报</h1>
+   <p>填写您需要申报的信息表单</p>
+   <n-space vertical>
+            <n-input placeholder="所要申报内容的学年" v-model:value="formyear" autosize style="min-width: 90%"></n-input>
+            <n-input placeholder="所要申报的项目类型" v-model:value="formscoretype" autosize style="min-width: 90%"
+              size="large"></n-input>
+              <n-input placeholder="申报分数" v-model:value="formscore" autosize style="min-width: 90%"
+              size="large"></n-input>
+            <n-input placeholder="申报理由" v-model:value="formscoreres" autosize style="min-width: 90%"
+              size="large"></n-input>
+          </n-space>
+          <br />
+   <p>上传您需要申报的文件</p>
+   <n-upload
+    multiple
+    directory-dnd
+    action="/api/student/apply"
+    method="put"
+    :data= forminfo
+    :max="5"
+  >
+    <n-upload-dragger>
+      <div style="margin-bottom: 12px">
+        <n-icon size="48" :depth="3">
+          <archive-icon />
+        </n-icon>
+      </div>
+      <n-text style="font-size: 16px">
+        点击或者拖动文件到该区域来上传
+      </n-text>
+      <n-p depth="3" style="margin: 8px 0 0 0">
+        上传您需要申报的文件
+      </n-p>
+    </n-upload-dragger>
+  </n-upload>
+</n-card>
+  </n-layout>
+</n-space>
 
-      <p>请再提交您需要申报的打包压缩文件<br />（全部材料压缩成一个zip上交）</p>
-      <n-upload ref="upload" action="/api/student/apply" :default-upload="false" method="put" :data="{
-        'count': account, 'year': formyear,
-        'score_type': formscoretype, 'score': formscore, 'score_reason': formscoreres
-      }" :max="1" @change="handleChange">
-        <n-button>选择文件</n-button>
-      </n-upload>
-      <n-button :disabled="!fileListLength" style="margin-bottom: 12px" @click="handleClick">
-        提交
-      </n-button>
+<n-space vertical>
 
-    </n-layout>
-  </n-space>
+          <n-layout  class="shenbao">
+            <h1>申报查询</h1>
+          <n-space>
+            <n-button @click="getCom" id="query">申报查询</n-button>
+          </n-space>
+          </n-layout>
 
-  <n-space vertical>
-    <n-layout class="shenbao">
-      <h1>申报查询</h1>
-      <n-space>
-        <n-button @click="getCom">申报查询</n-button>
-      </n-space>
-    </n-layout>
-    <n-space>
-      <n-layout class="form">
-        <n-table>
-          <thead>
-          <tr>
-            <th>申报序号</th>
-            <th>申报内容</th>
-            <th>申报原因</th>
-            <th>申报时间</th>
-            <th>审批状态</th>
-            <th></th>
-            <th></th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr v-for="form in formdata">
-            <td>{{ form.id }}</td>
-            <td>{{ form.score_type }}</td>
-            <td>{{ form.score_reason }}</td>
-            <td>{{ form.time }}</td>
-            <td v-if="form.state === 1">已通过</td>
-            <td v-if="form.state === 0">未审批</td>
-            <td v-if="form.state === 2">已驳回</td>
-          </tr>
-          </tbody>
-        </n-table>
-      </n-layout>
-    </n-space>
-
-  </n-space>
+          <n-space>
+            <n-layout class="form">
+            <n-card>
+              <n-table>
+                <thead>
+                  <tr>
+                    <th>申报序号</th>
+                    <th>申报内容</th>
+                    <th>申报原因</th>
+                    <th>申报时间</th>
+                    <th>审批状态</th>
+                    <th></th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr v-for="form in formdata">
+                    <td>{{ form.id }}</td>
+                    <td>{{ form.type }}</td>
+                    <td>{{ form.score_reason }}</td>
+                    <td>{{ form.time }}</td>
+                    <td v-if="form.state === 1">已通过</td>
+                    <td v-if="form.state === 0">未审批</td>
+                    <td v-if="form.state === 2">已驳回</td>
+                  </tr>
+                </tbody>
+              </n-table>
+             </n-card>
+            </n-layout>
+          </n-space>
+          
+        </n-space>
 </template>
 
 <style scoped>
@@ -158,8 +177,13 @@ onMounted(() => {
 }
 
 .shenbao {
-  top: 80px;
-  left: 50%;
+  top:80px;
+  left:65%;
+}
+
+#query{
+  position: relative;
+  left: 45%;
 }
 </style>
 

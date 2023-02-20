@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import { NSpace,NLayout} from 'naive-ui'
+  import { NSpace,NLayout,NButton,NCard,NInput } from 'naive-ui'
   import {ref} from "vue";
   import cookieStore from "../stores/cookieStore";
   import teacherService from "../apis/teacherServeice";
@@ -31,6 +31,8 @@
 <template>
 <n-space>
   <n-layout>
+  <n-space vertical>
+    <n-card id="card">
     <h1 id="Query">成绩管理</h1>
     <div>
       <n-input  round placeholder="学号"
@@ -40,8 +42,10 @@
       <n-input round placeholder="年份"
                class="year" v-model:value="year"/>
     </div>
-    <n-button class="button1" @click="query">查找</n-button>
+    <n-button id="button" @click="query" round>查找</n-button>
     <score-display-tea v-if="onSuccess" :res="resData"></score-display-tea>
+    </n-card>
+  </n-space>
   </n-layout>
 </n-space>
 </template>
@@ -57,10 +61,21 @@ right: 0px;
 background-color: white;
 }
 .year{
+  top: 3px;
   width: 200px;
 }
 .account{
   width: 200px;
+}
+
+#card{
+  width: 20%;
+  left: 300px;
+  top: 50px;
+}
+
+#button{
+  top: 5px;
 }
 </style>
 

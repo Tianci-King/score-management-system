@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import { NSpace,NLayout,NButton,NTable,NInput,NSelect,NGradientText } from 'naive-ui'
+  import { NSpace,NLayout,NButton,NTable,NInput,NSelect,NGradientText,NCard } from 'naive-ui'
   import {ref,onMounted,isRef} from "vue";
   import updateAPI from '../apis/Examine/AppealUpdate';
   import deleteAPI from '../apis/Examine/AppealDel';
@@ -127,6 +127,7 @@
 
   
   <n-layout id="layout1">
+  <n-card>
      <h1 id="Examine">审批申诉</h1>
   <n-space>
         <n-space vertical>    
@@ -202,7 +203,7 @@
 
 
   </n-space>
-
+  </n-card>
   </n-layout>
   
 </template>
@@ -220,5 +221,10 @@ background-color: white;
 
 #h2{
   width: 125px;
+}
+
+#Examine{
+  position: relative;
+  left: 40%;
 }
 </style>

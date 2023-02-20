@@ -9,7 +9,7 @@
       {{commentData.message}}
     </div>
     <n-input v-else v-model:value="commentData.message"/>
-    <div class="button" v-if="isMine">
+    <div class="button" v-if="isMine || identify === 'admin'">
       <n-button  type="info" @click="edit" >
         {{onEdit? "完成编辑" : "编辑"}}
       </n-button>
@@ -31,7 +31,8 @@ const props = defineProps({
   'data': Object
 });
 const emit = defineEmits(['change']);
-
+const pinia = cookieStore();
+const identify = pinia.identity;
 function edit() {
   if(onEdit.value === false) {
     onEdit.value = true;

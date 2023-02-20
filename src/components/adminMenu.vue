@@ -59,6 +59,40 @@ const menuOptions: MenuOption[] = [
             RouterLink,
             {
               to: {
+                name: 'ChatGround3',
+                params: {
+                  lang: 'zh-CN'
+                }
+              }
+            },
+            { default: () => '话题广场' }
+        ),
+    key: 'adminChat',
+    icon: renderIcon(ComplaintsIcon),
+  },
+  {
+    label: () =>
+        h(
+            RouterLink,
+            {
+              to: {
+                name: 'changPwdAdmin',
+                params: {
+                  lang: 'zh-CN'
+                }
+              }
+            },
+            { default: () => '修改密码' }
+        ),
+    key: 'changePwd',
+    icon: renderIcon(ComplaintsIcon),
+  },
+  {
+    label: () =>
+        h(
+            RouterLink,
+            {
+              to: {
                 name: 'Login',
                 params: {
                   lang: 'zh-CN'
@@ -78,7 +112,7 @@ const menuOptions: MenuOption[] = [
 .n-menu{
   background-color: white;
   height:100%;
-  position: absolute;
+  position: fixed;
   width:12%;
   left: 0%;
   top:80px;

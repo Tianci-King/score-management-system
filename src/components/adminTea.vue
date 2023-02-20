@@ -1,11 +1,13 @@
 <template>
   <n-space>
     <n-layout>
+      <n-card>
       <h1>添加辅导员账号</h1>
       <teacher-item :data="addData" :is-add="true" @add="addTeacher"/>
       <template v-for="item in data">
         <teacher-item :data="item" :is-add="false"/>
       </template>
+      </n-card>
     </n-layout>
   </n-space>
 </template>
@@ -14,7 +16,7 @@
 import adminService from "../apis/adminService";
 import {onMounted, ref} from "vue";
 import TeacherItem from "./teacherItem.vue";
-
+import { NSpace,NLayout, formDark, NButton, NIcon, NP, NTable, NText, NUpload, NUploadDragger,NCard } from 'naive-ui';
 const data = ref();
 const addData = ref({
   count: "",
@@ -66,7 +68,7 @@ onMounted(() => {
 <style scoped>
 .n-layout{
    height:100%;
-   width: auto;
+   width: 80%;
    top: 80px;
    position: absolute;
    left: 12%;

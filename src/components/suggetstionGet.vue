@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { NSpace,NLayout} from 'naive-ui'
+import { NSpace,NLayout,NCard } from 'naive-ui'
 import {computed, onMounted, ref} from "vue";
 import cookieStore from "../stores/cookieStore";
 import teacherService from "../apis/teacherServeice";
@@ -31,22 +31,26 @@ const hoverable = true;
   <n-space>
     <n-layout>
       <div v-if="suggestionList !== null" v-for="suggestion in suggestionList">
-        <n-card
+
+        <n-card id="card"
             size="huge"
             :bordered="bordered"
             :hoverable="hoverable"
         >
           <template #header>
-            {{suggestion.question}}
+              建议主题：{{suggestion.question}}
           </template>
           <template #action>
-              {{suggestion.anonymity? "匿名用户" : suggestion.account}}说 : {{suggestion.advice}}
+              建议内容：{{suggestion.anonymity? "匿名用户" : suggestion.account}}说 : {{suggestion.advice}}
             </template>
         </n-card>
+
       </div>
+
         <n-card v-if="!suggestionList">
            暂无建议
         </n-card>
+
     </n-layout>
   </n-space>
 </template>
@@ -60,5 +64,10 @@ const hoverable = true;
   left: 12%;
   right: 0px;
   background-color: white;
+}
+
+#card{
+  width: 80%;
+  position: relative;
 }
 </style>

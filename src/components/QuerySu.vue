@@ -1,5 +1,6 @@
 <script setup lang="ts">
   import { NSpace,NLayout,NButton,NCard} from 'naive-ui'
+  import {NGradientText} from "naive-ui";
   import {ref} from "vue";
   import studentService from "../apis/studentService";
   import {Score} from "../types/score";
@@ -31,7 +32,7 @@
   <n-layout>
   <n-card id="Query">
    <n-space vertical>
-     <h3 >成绩查询</h3>
+     <h3 id="title">成绩查询</h3>
       <div>
         <n-input  round placeholder="要查找的学号"
                   class="account" v-model:value="account"/>
@@ -71,5 +72,10 @@ background-color: white;
   width: 20%;
   left: 300px;
   top: 50px;
+}
+
+#title{
+  position: relative;
+  left: 30px;
 }
 </style>

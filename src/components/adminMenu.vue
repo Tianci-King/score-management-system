@@ -3,7 +3,6 @@
 </template>
 
 <script setup lang="ts">
-
 import { h, Component, defineComponent } from 'vue'
 import { NMenu,NIcon} from 'naive-ui'
 import type { MenuOption } from 'naive-ui'
@@ -12,7 +11,6 @@ import {
   HandLeftOutline as ComplaintsIcon,
 } from '@vicons/ionicons5'
 import { RouterLink } from 'vue-router'
-
 
 function renderIcon (icon: Component) {
   return () => h(NIcon, null, { default: () => h(icon) })

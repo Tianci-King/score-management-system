@@ -4,8 +4,8 @@
       <n-card>
       <h1>添加辅导员账号</h1>
       <teacher-item :data="addData" :is-add="true" @add="addTeacher"/>
-      <template v-for="item in data">
-        <teacher-item :data="item" :is-add="false"/>
+      <template v-for="item in data" v-if="!isFlash">
+        <teacher-item :data="item" :is-add="false" v-if="!isFlash"/>
       </template>
       </n-card>
     </n-layout>
@@ -29,6 +29,8 @@ const addData = ref({
   power6: 0,
 });
 
+const isFlash = ref<boolean>(false);
+
 function addTeacher(){
   adminService.addTeacher({
     "count": addData.value.count,
@@ -41,11 +43,15 @@ function addTeacher(){
     "power6": addData.value.power6? 1 : 0,
   }).then((res) => {
     if (res.data.msg === "OK") {
-      alert("添加成功!")
-      getTeacherItem()
+      alert("添加成功!");
+      isFlash.value = true;
+      getTeacherItem();
+      console.log(data.value);
     }
     else
       alert(res.data.msg);
+
+    isFlash.value = false;
   })
 }
 
@@ -53,6 +59,7 @@ function getTeacherItem() {
   adminService.getTeacher().then((res) => {
     if(res.data.msg === "OK") {
       data.value = res.data.data;
+      console.log(data.value)
     }
     else
       alert(res.data.msg);

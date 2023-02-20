@@ -1,19 +1,19 @@
 <template>
   <n-space>
-  <n-layout id="layout1"> 
+  <n-layout id="layout1">
 
    <h3 class="title">综测成绩查询页面</h3>
 
-   <n-space vertical>  
-     <n-space space-around>  
+   <n-space vertical>
+     <n-space space-around>
      <n-icon size="30" class="person">
        <PersonIcon></PersonIcon>
      </n-icon>
      <n-input  round placeholder="用户名"
      class="username" v-model:value="account"/>
      </n-space>
-   
-     <n-space space-around>   
+
+     <n-space space-around>
      <n-icon size="32" class="key">
        <KeyIcon></KeyIcon>
      </n-icon>
@@ -21,14 +21,14 @@
      <n-input round placeholder="密码"
      class="password" v-model:value="password"  type="password" show-password-on="mousedown"/>
      </n-space>
- 
+
    </n-space>
 
-   <n-space space-around> 
+   <n-space space-around>
     <n-button class="button1" @click="login">登录</n-button>
     <n-button class="button2" @click="cleanText">清空</n-button>
    </n-space>
-    
+
 
   </n-layout>
  </n-space>

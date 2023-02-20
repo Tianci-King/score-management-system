@@ -3,9 +3,9 @@
     <n-layout>
       <n-card>
       <h1>添加学生账号</h1>
-      <student-item :data="addData" :is-add="true" @add="addStudentItem" @del="getStudentItem"/>
+      <student-item :data="addData" :is-add="true" @add="addStudentItem"/>
       <template v-for="item in formData">
-          <student-item :data="item" :is-add="false" />
+          <student-item :data="item" :is-add="false"  @change="getStudentItem"/>
       </template>
       </n-card>
     </n-layout>
@@ -25,9 +25,11 @@ const addData = ref({
 const formData = ref();
 function getStudentItem () {
   adminService.getStudent().then((res) => {
-    console.log(res.data.msg);
-    if(res.data.msg === "OK")
+    console.log(res.data.data);
+    if(res.data.msg === "OK") {
       formData.value = res.data.data;
+      console.log(formData.value)
+    }
     else
       alert(res.data.msg)
   })
@@ -36,12 +38,14 @@ function getStudentItem () {
 function addStudentItem() {
   adminService.addStudent(addData.value)
       .then((res) => {
-         if(res.data.msg === "OK")
+         if(res.data.msg === "OK") {
+           getStudentItem();
            alert("添加成功");
+         }
          else
            alert(res.data.msg);
       })
-  getStudentItem();
+
 }
 
 onMounted(() => {

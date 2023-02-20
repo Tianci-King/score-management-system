@@ -134,9 +134,9 @@ function deleteTea() {
       alert(res.data.msg);
   })
 }
-switchData(props.data)
+
 const formValue = computed(() => {
-  return props.data;
+  return switchData(props.data);
 })
 
 function switchData(data) {

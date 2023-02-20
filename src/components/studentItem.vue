@@ -39,7 +39,7 @@ const props = defineProps({
   'isAdd': Boolean,
 })
 
-const emit = defineEmits(['del','add']);
+const emit = defineEmits(['del','add','change']);
 
 const isDelete = ref(false);
 const rules = {
@@ -61,8 +61,10 @@ function putChange() {
     "account": formValue.value.count,
     "match": formValue.value.match,
   }).then((res) => {
-    if (res.data.msg === "OK")
+    if (res.data.msg === "OK") {
       alert("修改成功!")
+      emit('change');
+    }
     else
       alert(res.data.msg);
   })
@@ -74,6 +76,7 @@ function deleteStu() {
   }).then((res) => {
     if (res.data.msg === "OK") {
       isDelete.value = true
+      emit('change');
       alert("删除成功!")
     }
     else

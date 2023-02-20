@@ -174,6 +174,14 @@ const routes = [
       'default': admin,
       'right': adminStu,
     }
+  },
+  {
+    path: "/admin",
+    name: "ChatGround3",
+    components: {
+      'default': admin,
+      'right': ChatGround,
+    }
   }
 ]
 

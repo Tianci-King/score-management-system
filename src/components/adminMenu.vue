@@ -59,6 +59,23 @@ const menuOptions: MenuOption[] = [
             RouterLink,
             {
               to: {
+                name: 'ChatGround3',
+                params: {
+                  lang: 'zh-CN'
+                }
+              }
+            },
+            { default: () => '话题广场' }
+        ),
+    key: 'adminChat',
+    icon: renderIcon(ComplaintsIcon),
+  },
+  {
+    label: () =>
+        h(
+            RouterLink,
+            {
+              to: {
                 name: 'Login',
                 params: {
                   lang: 'zh-CN'

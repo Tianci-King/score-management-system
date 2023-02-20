@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import Top from '../components/Top.vue';
+import TopAdmin from '../components/TopAdmin.vue';
 import StudentMenu from '../components/StudentMenu.vue';
 import AdminMenu from "../components/adminMenu.vue";
 import {onMounted} from "vue";
@@ -16,7 +16,7 @@ onMounted( () => {
 
 <template>
   <admin-menu></admin-menu>
-  <Top></Top>
+  <TopAdmin></TopAdmin>
 </template>
 
 

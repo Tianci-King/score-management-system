@@ -67,6 +67,8 @@ async function login(){
     piniaCookie.timeIs(res.data.data.start_time,res.data.data.end_time);
     piniaCookie.matchIs(res.data.data.match);
     console.log(res.data.data.match);
+    piniaCookie.routerIs(res.data.data.routername);
+    console.log(res.data.data.routername);
     alert("登陆成功");
     await router.push(res.data.data.identity.toString());
   }

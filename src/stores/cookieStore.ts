@@ -7,6 +7,7 @@ const cookieStore = defineStore("account",() => {
     const endTime = ref();
     const identity = ref("");
     const match = ref("");
+    const routername = ref("");
     const cookieIs = (tmp: string) => {
         cookie.value = "account="+tmp;
         account.value = tmp;
@@ -22,6 +23,9 @@ const cookieStore = defineStore("account",() => {
     const matchIs = (matchlogin:string) => {
         match.value = matchlogin;
     }
+    const routerIs = (routernamelogin:string) => {
+        routername.value = routernamelogin;
+    }
     return {
         cookie,
         cookieIs,
@@ -33,6 +37,8 @@ const cookieStore = defineStore("account",() => {
         identity,
         matchIs,
         match,
+        routerIs,
+        routername
     }
 })
 

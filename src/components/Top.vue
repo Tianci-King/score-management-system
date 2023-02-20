@@ -5,18 +5,34 @@
     PersonOutline as PersonIcon,
     KeyOutline as KeyIcon
    } from '@vicons/ionicons5';
+  import { defineComponent, ref, watch, toRaw } from "vue";
+  import { useRoute } from "vue-router";
+  import { Vue2 } from "vue-demi";
+  import router from "../routers";
+import { storeToRefs } from "pinia";
+import cookieStore from "../stores/cookieStore";
 
-   import { defineComponent, ref, watch, toRaw } from "vue";
-   import { useRoute } from "vue-router";
-import { Vue2 } from "vue-demi";
+   const store = cookieStore();
+   const {routername} = storeToRefs(store);
+   const fun1 = () => {
+    router.push("/" + routername.value);
+   }
 
-   let router = useRoute();
-   let routerPath = router.path;
-   let str = routerPath.substring(1);
-   let routerPathFrontNumber = str.indexOf("/");
-   const routerPathFront = str.substring(0,routerPathFrontNumber);
+   const fun2 = () => {
+    router.push("/" + routername.value + "/Query");
+  }
 
+  const fun3 = () => {
+    router.push("/" + routername.value + "/ChatGround");
+  }
 
+  const fun4 = () => {
+    router.push("/" + routername.value + "/MailBox");
+  }
+  const func5 = () => {
+    router.push('/'+ routername.value + '/Change');
+  }
+  
 </script>
 
   <template>
@@ -30,12 +46,12 @@ import { Vue2 } from "vue-demi";
 
           <p id="Title1">用户页面</p>
 
-          <n-icon size="30" id="key-icon">
+          <n-icon @click="func5()" size="30" id="key-icon">
              <key-icon />
           </n-icon>
           
 
-          <a id="Title2" :href="'/'+routerPathFront+'/Change'" class=" text-white nav-link">修改密码</a>
+          <a id="Title2" @click="func5()" class=" text-white nav-link">修改密码</a>
 
           <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
             <symbol id="home" viewBox="0 0 16 16">
@@ -59,36 +75,36 @@ import { Vue2 } from "vue-demi";
 
           <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
             <li>
-              <a href="/home" class="nav-link text-white">
+              <button class="nav-link text-secondary button" @click="fun1()">
                 <svg class="bi d-block mx-auto mb-1" width="24" height="24">
                   <use xlink:href="#home" />
                 </svg>
                 首页
-              </a>
+              </button>
             </li>
             <li>
-              <a href="/wall/createM" class="nav-link text-secondary">
+              <button class="nav-link text-secondary button" @click="fun2()">
                 <svg class="bi d-block mx-auto mb-1" width="24" height="24">
                   <use xlink:href="#table" />
                 </svg>
                 综测成绩
-              </a>
+              </button>
             </li>
             <li>
-              <a href="/more" class="nav-link text-white">
+              <button class="nav-link text-secondary button" @click="fun3()">
                 <svg class="bi d-block mx-auto mb-1" width="24" height="24">
                   <use xlink:href="#grid" />
                 </svg>
                 话题广场
-              </a>
+              </button>
             </li>
             <li>
-              <a href="/user" class="nav-link text-white">
+              <button class="nav-link text-secondary button" @click="fun4()">
                 <svg class="bi d-block mx-auto mb-1" width="24" height="24">
                   <use xlink:href="#people-circle" />
                 </svg>
                 意见反馈
-              </a>
+              </button>
             </li>
           </ul>
 
@@ -135,5 +151,10 @@ import { Vue2 } from "vue-demi";
     position: fixed;
     right: 7%;
     top:36px;
+  }
+
+  .button {
+    outline:none;
+    border:none;
   }
   </style>

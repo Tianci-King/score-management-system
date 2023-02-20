@@ -148,7 +148,7 @@ const routes = [
     }
   },
   {
-    path: "/Teacher",
+    path: "/Teacher/Suggest",
     name: "Suggestion",
     components: {
       'default': Teacher,
@@ -173,6 +173,14 @@ const routes = [
     components: {
       'default': admin,
       'right': adminStu,
+    }
+  },
+  {
+    path:"/Admin/Change",
+    name:"Change3",
+    components: {
+      'default': admin,
+      right: Change
     }
   }
 ]

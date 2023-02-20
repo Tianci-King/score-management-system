@@ -76,6 +76,23 @@ const menuOptions: MenuOption[] = [
             RouterLink,
             {
               to: {
+                name: 'changPwdAdmin',
+                params: {
+                  lang: 'zh-CN'
+                }
+              }
+            },
+            { default: () => '修改密码' }
+        ),
+    key: 'changePwd',
+    icon: renderIcon(ComplaintsIcon),
+  },
+  {
+    label: () =>
+        h(
+            RouterLink,
+            {
+              to: {
                 name: 'Login',
                 params: {
                   lang: 'zh-CN'

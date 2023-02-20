@@ -182,6 +182,14 @@ const routes = [
       'default': admin,
       'right': ChatGround,
     }
+  },
+  {
+    path: "/admin",
+    name: "changPwdAdmin",
+    components: {
+      'default': admin,
+      'right': Change,
+    }
   }
 ]
 

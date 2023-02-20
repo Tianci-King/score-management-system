@@ -59,7 +59,7 @@ import { Vue2 } from "vue-demi";
 
           <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
             <li>
-              <a href="/home" class="nav-link text-white">
+              <a href="'/'+routerPathFront" class="nav-link text-white">
                 <svg class="bi d-block mx-auto mb-1" width="24" height="24">
                   <use xlink:href="#home" />
                 </svg>
@@ -67,7 +67,7 @@ import { Vue2 } from "vue-demi";
               </a>
             </li>
             <li>
-              <a href="/wall/createM" class="nav-link text-secondary">
+              <a href="'/'+routerPathFront+''" class="nav-link text-secondary">
                 <svg class="bi d-block mx-auto mb-1" width="24" height="24">
                   <use xlink:href="#table" />
                 </svg>
@@ -75,7 +75,7 @@ import { Vue2 } from "vue-demi";
               </a>
             </li>
             <li>
-              <a href="/more" class="nav-link text-white">
+              <a href="'/'+routerPathFront+'/ChatGround'" class="nav-link text-white">
                 <svg class="bi d-block mx-auto mb-1" width="24" height="24">
                   <use xlink:href="#grid" />
                 </svg>

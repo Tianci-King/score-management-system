@@ -32,7 +32,7 @@
   const ExcuseId = ref();
   
   const onClickPatch= (Address:any)=>{
-    window.location.href=Address;
+    window.open(Address);
   }
 
   const onClickExcuse =async()=>{

@@ -82,6 +82,8 @@
      count:account
     });
     console.log(res);
+    const list = await getAppeals();
+    Appeals.value = list.data;
   }  
   //Update1是通过申诉
 
@@ -94,6 +96,8 @@
      count:account
     });
     console.log(res);
+    const list = await getAppeals();
+    Appeals.value = list.data;
   }
   //Update2是驳回申诉
 
@@ -103,6 +107,8 @@
      count:account
      });
     console.log(res);
+    const list = await getAppeals();
+    Appeals.value = list.data;
    } 
 
 

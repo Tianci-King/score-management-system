@@ -69,8 +69,8 @@ background-color: white;
 }
 
 #card{
-  width: 100%;
-  top: 50px;
+  width: 90%;
+
 }
 
 #button{

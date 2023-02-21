@@ -56,7 +56,7 @@ height:100%;
 width: auto;
 top: 80px;
 position: absolute;
-left: 20%;
+left: 12%;
 right: 0px;
 background-color: white;
 }
@@ -69,9 +69,9 @@ background-color: white;
 }
 
 #Query{
-  width: 100%;
+  width: 90%;
   
-  top: 50px;
+
 }
 
 #title{

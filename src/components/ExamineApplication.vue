@@ -24,8 +24,8 @@
   const selectedId = ref(); 
   const msg = ref("");
   const msgFlag = ref(false);
-  const start_time = piniaCookie.beginTime
-  const end_time = piniaCookie.endTime
+  const start_time_1 =ref("2022-08-12 22:00:00") //piniaCookie.beginTime.value
+  const end_time_1 =ref("2022-08-12 22:00:00")  //piniaCookie.endTime.value
   const ExcuseU =ref(false);
   const ExcuseD =ref(false);
   const timeFlag =ref(false);
@@ -144,8 +144,8 @@
 
   const onClickTime = async()=>{
     const res = await timeAPI({
-      start_time:start_time,
-      end_time:end_time,
+      start_time:start_time_1,
+      end_time:end_time_1,
       count:account
     });
     console.log(res);
@@ -263,14 +263,14 @@
         <n-card id="time">
         <h4>申报递交时间设置：</h4>
         <n-date-picker
-        v-model:formatted-value="start_time"
+        v-model:formatted-value="start_time_1"
         value-format="yyyy-MM-dd HH:mm:ss"
         type="datetime"
         clearable
         />
 
         <n-date-picker
-        v-model:formatted-value="end_time"
+        v-model:formatted-value="end_time_1"
         value-format="yyyy-MM-dd HH:mm:ss"
         type="datetime"
         clearable

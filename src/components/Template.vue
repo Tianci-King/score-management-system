@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { NSpace,NLayout} from 'naive-ui'
+import { NSpace,NLayout,NGradientText,NCard} from 'naive-ui'
 import { storeToRefs } from 'pinia';
 import  cookieStore  from '../stores/cookieStore'
 
@@ -16,7 +16,18 @@ console.log(major);
 <template>
   <n-space>
     <n-layout>
-      <n-card title="Welcome">
+     <n-gradient-text id="h"
+        :gradient="{
+        deg: 180,
+        from: 'rgb(85, 85, 85)',
+        to: 'rgb(170, 170, 170)'
+        }"
+        >
+         Welcome!    
+        </n-gradient-text>
+      <n-card >
+       
+ 
         <p>学号：{{account}}</p>
         <p v-if="grade === '2022'">年级：大一</p>
         <p v-if="grade === '2021'">年级：大二</p>
@@ -24,6 +35,7 @@ console.log(major);
         <p v-if="grade === '2019'">年级：大四</p>
         <p v-if="major === '0503'">学院：机械学院</p>
         <p v-if="major === '0315'">学院：计算机学院</p>
+      
       </n-card>
     </n-layout>
   </n-space>
@@ -38,5 +50,11 @@ console.log(major);
   left: 16%;
   right: 0px;
   background-color: white;
+}
+
+#h {
+  font-size: 29px;
+  left: 30%;
+  position: relative;
 }
 </style>

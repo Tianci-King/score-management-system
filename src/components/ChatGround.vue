@@ -4,7 +4,7 @@
   import cookieStore from "../stores/cookieStore";
   import postService from "../apis/postService"
   import Post from "./post.vue";
-  import { ArrowBackOutline, ArrowForwardOutline } from '@vicons/ionicons5'
+  import { ArrowBackOutline, ArrowForwardOutline,CloudOutline } from '@vicons/ionicons5'
 
   const accountStore = cookieStore();
   const postList = ref();
@@ -71,7 +71,10 @@
   <n-layout>
 
   <n-card id="chatGround">
+   <n-space>
+   <n-icon :component="CloudOutline" size="40" :depth="1" id="cloud" />
    <h1 id="h">话题广场</h1>
+   </n-space>
       <n-space vertical >
       <n-card  :bordered="false" >
       <n-space vertical id="input">
@@ -93,7 +96,7 @@
       </n-switch>
       </n-card>
       <n-card id="xize">
-       <n-button  @click="showModal = true">查看加分细则</n-button>
+       <n-button  @click="showModal = true" type="success">查看加分细则</n-button>
       </n-card>
       </n-space>
   </n-card>
@@ -138,9 +141,11 @@
             </n-tag>
           </n-space>
         </template>
-        1:科学素养<br>
-        2:社会责任<br>
-        3:国际视野
+        1:德育素质<br>
+        2:智育素质<br>
+        3:体育素质<br>
+        4:劳育素质<br>
+        5:创新与实践素质
       </n-thing>
       </template>
     </n-card>
@@ -185,7 +190,7 @@ width: 80%;
 
 #h{
 position: relative;
-left: 35%;
+left: 40%;
 }
 
 #button{
@@ -199,4 +204,8 @@ text-align:center
   left:80%;
 }
 
+#cloud{
+  position: relative;
+  left: 100%;
+}
 </style>

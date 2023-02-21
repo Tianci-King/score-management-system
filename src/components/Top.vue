@@ -8,7 +8,6 @@
 
    import { defineComponent, ref, watch, toRaw } from "vue";
    import { useRoute } from "vue-router";
-import { Vue2 } from "vue-demi";
 
    let router = useRoute();
    let routerPath = router.path;

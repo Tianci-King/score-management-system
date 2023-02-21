@@ -2,7 +2,7 @@
   <n-space>
     <n-layout>
       <n-card>
-      <h1>添加辅导员账号</h1>
+      <h1>管理辅导员账号</h1>
       <teacher-item :data="addData" :is-add="true" @add="addTeacher"/>
       <template v-for="item in data" v-if="!isFlash">
         <teacher-item :data="item" :is-add="false" v-if="!isFlash"/>

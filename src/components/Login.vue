@@ -19,7 +19,7 @@
      </n-icon>
 
      <n-input round placeholder="密码"
-     class="password" v-model:value="password"  type="password" show-password-on="mousedown"/>
+     class="password" v-model:value="password"  type="password" show-password-on="mousedown" maxlength="12"/>
      </n-space>
 
    </n-space>

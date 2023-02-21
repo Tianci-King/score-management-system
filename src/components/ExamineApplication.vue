@@ -63,6 +63,7 @@
   const onClickExcuseUpdate= async()=>{
     const res = await updateExcuseAPI({
       label:newExcuse.value,
+      count:account
     })
     console.log(res);
     const list = await ExcuseGet();
@@ -72,6 +73,7 @@
 
   const onClickExcuseDelete= async(value:any)=>{
     const res = await deleteExcuseAPI({
+      count:account,
       value:value
     })
     console.log(res);
@@ -90,7 +92,7 @@
      id:selectedId.value,
      advice:advice.value,
      message:message.value,
-     state:1,
+     state:1, count:account
     });
     console.log(res);
     const list = await getApplications();
@@ -104,6 +106,7 @@
      advice:advice.value,
      message:message.value,
      state:2,
+     count:account
     });
     console.log(res);
     const list = await getApplications();
@@ -113,7 +116,8 @@
 
   const onClickDelete = async(id:number) =>{
     const res = await deleteAPI({
-     id:id
+     id:id,
+     count:account
      });
     console.log(res);
     const list = await getApplications();

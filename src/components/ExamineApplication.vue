@@ -9,7 +9,7 @@
   import getExcuseAPI from '../apis/Examine/ExcuseGet';
   import updateExcuseAPI from '../apis/Examine/ExcuseUpdate';
   import deleteExcuseAPI from '../apis/Examine/ExcuseDel';
- 
+
 
   const piniaCookie = cookieStore();
   const account = piniaCookie.account 
@@ -32,7 +32,8 @@
   const ExcuseId = ref();
   
   const onClickPatch= (Address:any)=>{
-    window.open(Address);
+    let path =window.location.protocol + '//'+Address;
+    window.location.href=path;
   }
 
   const onClickExcuse =async()=>{
@@ -62,6 +63,7 @@
   const onClickExcuseUpdate= async()=>{
     const res = await updateExcuseAPI({
       label:newExcuse.value,
+      count:account
     })
     console.log(res);
     const list = await ExcuseGet();
@@ -71,7 +73,8 @@
 
   const onClickExcuseDelete= async(value:any)=>{
     const res = await deleteExcuseAPI({
-      value:value
+      value:value,
+      count:account
     })
     console.log(res);
     const list = await ExcuseGet();
@@ -94,6 +97,8 @@
     console.log(res);
     const list = await getApplications();
     Applications.value = list.data;
+    message.value ="";
+    advice.value =""
   }  
   //Update1是通过申报
 
@@ -107,6 +112,8 @@
     console.log(res);
     const list = await getApplications();
     Applications.value = list.data;
+    message.value ="";
+    advice.value =""
   }
   //Update2是驳回申报
 
@@ -167,7 +174,7 @@
              <tr>
              <th>申报序号</th>
              <th>申报分数</th>
-             <th>申报学科</th>
+             <th>申报项目</th>
              <th>申报原因</th>
              <th>申报时间</th>
              <th>申报附件</th>
@@ -227,7 +234,7 @@
     
         <n-space>
         <n-button @click="onClickExcuse">上传</n-button>
-        <n-button @click="onClickExcuseDelete">删除</n-button>
+        <n-button @click="onClickExcuseDelete(ExcuseId)">删除</n-button>
         </n-space>
         <n-input placeholder="新建理由内容"
         v-model:value="newExcuse" 

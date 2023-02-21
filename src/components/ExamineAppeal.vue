@@ -84,6 +84,8 @@
     console.log(res);
     const list = await getAppeals();
     Appeals.value = list.data;
+    message.value ="";
+    advice.value =""
   }  
   //Update1是通过申诉
 
@@ -98,6 +100,8 @@
     console.log(res);
     const list = await getAppeals();
     Appeals.value = list.data;
+    message.value ="";
+    advice.value =""
   }
   //Update2是驳回申诉
 
@@ -204,7 +208,7 @@
     
         <n-space>
         <n-button @click="onClickExcuse">上传</n-button>
-        <n-button @click="onClickExcuseDelete">删除</n-button>
+        <n-button @click="onClickExcuseDelete(ExcuseId)">删除</n-button>
         </n-space>
         <n-input placeholder="新建理由内容"
         v-model:value="newExcuse" 

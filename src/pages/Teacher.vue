@@ -1,9 +1,10 @@
 <script setup lang="ts">
-  import Top from '../components/Top.vue';
+  import Top from '../components/TopTeacher.vue';
   import TeacherMenu from '../components/TeacherMenu.vue';
   import {onMounted} from "vue";
   import cookieStore from "../stores/cookieStore";
   import router from "../routers";
+import TopTeacher from '../components/TopTeacher.vue';
 
   onMounted(async () => {
     const pinia = cookieStore();

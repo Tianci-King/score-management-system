@@ -9,8 +9,7 @@
   import getExcuseAPI from '../apis/Examine/ExcuseGet';
   import updateExcuseAPI from '../apis/Examine/ExcuseUpdate';
   import deleteExcuseAPI from '../apis/Examine/ExcuseDel';
-  import {itemMsg} from "../constants/itemMsg";
-
+ 
 
   const piniaCookie = cookieStore();
   const account = piniaCookie.account 
@@ -63,7 +62,6 @@
   const onClickExcuseUpdate= async()=>{
     const res = await updateExcuseAPI({
       label:newExcuse.value,
-      count:account
     })
     console.log(res);
     const list = await ExcuseGet();
@@ -73,7 +71,6 @@
 
   const onClickExcuseDelete= async(value:any)=>{
     const res = await deleteExcuseAPI({
-      count:account,
       value:value
     })
     console.log(res);
@@ -92,7 +89,7 @@
      id:selectedId.value,
      advice:advice.value,
      message:message.value,
-     state:1, count:account
+     state:1,
     });
     console.log(res);
     const list = await getApplications();
@@ -106,7 +103,6 @@
      advice:advice.value,
      message:message.value,
      state:2,
-     count:account
     });
     console.log(res);
     const list = await getApplications();
@@ -116,8 +112,7 @@
 
   const onClickDelete = async(id:number) =>{
     const res = await deleteAPI({
-     id:id,
-     count:account
+     id:id
      });
     console.log(res);
     const list = await getApplications();
@@ -127,16 +122,13 @@
 
   const onClickTime = async()=>{
     const res = await timeAPI({
-      start_time:start_time.value,
-      end_time:end_time.value,
+      start_time:start_time,
+      end_time:end_time,
       count:account
     });
-    if(res.data.msg === "OK")
-       alert("设置成功!");
-    else
-      alert(res.data.msg);
     console.log(res);
   }
+
 
   const getApplications = async () =>{
     const res = await getAPI({
@@ -189,7 +181,7 @@
              <tr v-for="Application in Applications">
                <td>{{ Application.id }}</td>
                <td>{{ Application.score }}</td>
-               <td>{{ itemMsg[Application.score_type].name }}</td>
+               <td>{{ Application.score_type }}</td>
                <td>{{ Application.score_reason }}</td>
                <td>{{ Application.time }}</td>
                <td><n-button @click="onClickPatch(Application.address)">获取附件</n-button></td>

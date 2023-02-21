@@ -35,7 +35,7 @@
    <n-card id="card">
    <h1 id="Change">修改密码</h1>
     <div>
-      <n-input  round placeholder="旧密码"
+      <n-input  round placeholder="老密码"
                 class="username" v-model:value="old_password"/>
     </div>
     <div>

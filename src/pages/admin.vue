@@ -1,10 +1,11 @@
 <script setup lang="ts">
-import Top from '../components/Top.vue';
+import Top from '../components/TopAdmin.vue';
 import StudentMenu from '../components/StudentMenu.vue';
 import AdminMenu from "../components/adminMenu.vue";
 import {onMounted} from "vue";
 import cookieStore from "../stores/cookieStore";
 import router from "../routers";
+import TopAdmin from '../components/TopAdmin.vue';
 
 const pinia = cookieStore();
 onMounted( () => {
@@ -16,7 +17,7 @@ onMounted( () => {
 
 <template>
   <admin-menu></admin-menu>
-  <Top></Top>
+  <TopAdmin></TopAdmin>
 </template>
 
 

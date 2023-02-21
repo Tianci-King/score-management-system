@@ -58,9 +58,9 @@
   }
 
 
-  const onClickExcuseDelete= async(value:any)=>{
+  const onClickExcuseDelete= async()=>{
     const res = await deleteExcuseAPI({
-      value:value,
+      value:ExcuseId,
       count:account
     })
     console.log(res);
@@ -208,7 +208,7 @@
     
         <n-space>
         <n-button @click="onClickExcuse">上传</n-button>
-        <n-button @click="onClickExcuseDelete(ExcuseId)">删除</n-button>
+        <n-button @click="onClickExcuseDelete">删除</n-button>
         </n-space>
         <n-input placeholder="新建理由内容"
         v-model:value="newExcuse" 

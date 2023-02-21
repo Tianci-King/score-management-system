@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import { NSpace,NLayout,NButton,NTable,NInput,NGradientText,NDatePicker,NCard } from 'naive-ui'
+  import { NSpace,NLayout,NButton,NTable,NInput,NGradientText,NDatePicker,NCard,NModal } from 'naive-ui'
   import {ref,onMounted} from "vue";
   import updateAPI from '../apis/Examine/ApplicationUpdate';
   import deleteAPI from '../apis/Examine/ApplicationDel';
@@ -9,6 +9,7 @@
   import getExcuseAPI from '../apis/Examine/ExcuseGet';
   import updateExcuseAPI from '../apis/Examine/ExcuseUpdate';
   import deleteExcuseAPI from '../apis/Examine/ExcuseDel';
+ 
 
 
   const piniaCookie = cookieStore();
@@ -20,7 +21,8 @@
   const Application3 = {score:"3",score_reason:"3",score_type:"d21",time:'2007.06.30 12:08:55',state:0,id:3}
   const ApplicationTest =[Application1,Application2,Application3]   //测试使用
   const selectedId = ref(); 
-
+  const msg = ref("");
+  const msgFlag = ref(false);
   const start_time = ref('2023-02-10 12:08:55');
   const end_time = ref('2023-09-30 12:08:55');
 
@@ -73,7 +75,7 @@
 
   const onClickExcuseDelete= async()=>{
     const res = await deleteExcuseAPI({
-      value:ExcuseId,
+      value:ExcuseId.value,
       count:account
     })
     console.log(res);
@@ -95,10 +97,15 @@
      state:1,
     });
     console.log(res);
+    msg.value = res.data.msg;
+    if(msg.value!=""){
+      msgFlag.value=true;
+    }
     const list = await getApplications();
     Applications.value = list.data;
     message.value ="";
-    advice.value =""
+    advice.value ="";
+    selectedId.value ="";
   }  
   //Update1是通过申报
 
@@ -113,7 +120,8 @@
     const list = await getApplications();
     Applications.value = list.data;
     message.value ="";
-    advice.value =""
+    advice.value ="";
+    selectedId.value ="";
   }
   //Update2是驳回申报
 
@@ -165,7 +173,7 @@
   <n-layout id="layout1">
   <n-card>
      <h1 id="Examine">审批申报</h1>
-
+  
   <n-space>
         <n-space vertical>    
         <h2>申报栏</h2>
@@ -261,6 +269,18 @@
         <n-button @click="onClickTime()">递交</n-button>
         </n-card>
        </n-space>
+<n-modal v-model:show="msgFlag">
+    <n-card
+      style="width: 300px"
+      title="注意！"
+      :bordered="false"
+      size="huge"
+      role="dialog"
+      aria-modal="true"
+    >
+      该项目或该分项分数超过上限!
+    </n-card>
+  </n-modal>
   </n-space>
   </n-card>
   </n-layout>

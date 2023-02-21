@@ -60,7 +60,7 @@
 
   const onClickExcuseDelete= async()=>{
     const res = await deleteExcuseAPI({
-      value:ExcuseId,
+      value:ExcuseId.value,
       count:account
     })
     console.log(res);
@@ -85,7 +85,8 @@
     const list = await getAppeals();
     Appeals.value = list.data;
     message.value ="";
-    advice.value =""
+    advice.value ="";
+    selectedId.value ="";
   }  
   //Update1是通过申诉
 
@@ -101,7 +102,8 @@
     const list = await getAppeals();
     Appeals.value = list.data;
     message.value ="";
-    advice.value =""
+    advice.value ="";
+    selectedId.value ="";
   }
   //Update2是驳回申诉
 

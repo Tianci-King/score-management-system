@@ -53,7 +53,7 @@
 <style scoped>
 .n-layout{
 height:100%;
-width: auto;
+width: 100%;
 top: 80px;
 position: absolute;
 left: 12%;
@@ -69,7 +69,7 @@ background-color: white;
 }
 
 #card{
-  width: 20%;
+  width: 60%;
   left: 300px;
   top: 50px;
 }

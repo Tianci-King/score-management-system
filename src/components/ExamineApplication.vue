@@ -9,6 +9,7 @@
   import getExcuseAPI from '../apis/Examine/ExcuseGet';
   import updateExcuseAPI from '../apis/Examine/ExcuseUpdate';
   import deleteExcuseAPI from '../apis/Examine/ExcuseDel';
+
  
 
 
@@ -27,6 +28,7 @@
   const end_time = ref('2023-09-30 12:08:55');
   const ExcuseU =ref(false);
   const ExcuseD =ref(false);
+  const timeFlag =ref(false);
 
   let Applications = <any>ref([]);//获取的数据
   let Excuses = <any>ref([]);//理由库获取的数据
@@ -147,6 +149,8 @@
       count:account
     });
     console.log(res);
+    timeFlag.value=true;
+    
   }
 
 
@@ -311,7 +315,18 @@
                  理由新建成功！
                 </n-card>
         </n-modal>
-
+        <n-modal v-model:show="timeFlag">
+                <n-card
+                   style="width: 300px"
+                   title=""
+                   :bordered="false"
+                   size="huge"
+                   role="dialog"
+                    aria-modal="true"
+                   >
+                 递交成功！
+                </n-card>
+        </n-modal>
   </n-space>
   </n-card>
   </n-layout>

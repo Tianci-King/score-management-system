@@ -69,7 +69,7 @@ background-color: white;
 }
 
 #Query{
-  width: 20%;
+  width: 60%;
   left: 300px;
   top: 50px;
 }

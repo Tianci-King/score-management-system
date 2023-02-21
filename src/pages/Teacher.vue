@@ -16,7 +16,7 @@ import TopTeacher from '../components/TopTeacher.vue';
 
 <template>
  <TeacherMenu></TeacherMenu>
- <TopTeacher></TopTeacher>
+ <Top></Top>
 </template>
 
 

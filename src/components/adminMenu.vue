@@ -74,7 +74,7 @@ const menuOptions: MenuOption[] = [
             RouterLink,
             {
               to: {
-                name: 'changPwdAdmin',
+                name: 'Change3',
                 params: {
                   lang: 'zh-CN'
                 }

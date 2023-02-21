@@ -4,6 +4,7 @@
   import {onMounted} from "vue";
   import cookieStore from "../stores/cookieStore";
   import router from "../routers";
+  import TopTeacher from "../components/TopTeacher.vue";
   const pinia = cookieStore();
   onMounted( () => {
     console.log(pinia.identity + "e身份");
@@ -14,7 +15,7 @@
 
 <template>
  <StudentMenu></StudentMenu>
- <Top></Top>
+  <TopTeacher></TopTeacher>
 </template>
 
 

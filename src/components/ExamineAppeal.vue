@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import { NSpace,NLayout,NButton,NTable,NInput,NSelect,NGradientText,NCard } from 'naive-ui'
+  import { NSpace,NLayout,NButton,NTable,NInput,NSelect,NGradientText,NCard,NModal } from 'naive-ui'
   import {ref,onMounted,isRef} from "vue";
   import updateAPI from '../apis/Examine/AppealUpdate';
   import deleteAPI from '../apis/Examine/AppealDel';
@@ -21,6 +21,8 @@
   let Excuses = <any>ref([]);//理由库获取的数据
   const newExcuse =ref('');
   const ExcuseId = ref();
+  const ExcuseU =ref(false);
+  const ExcuseD =ref(false);
 
 
   const onClickExcuse =async()=>{
@@ -53,8 +55,11 @@
       count:account
     })
     console.log(res);
+    ExcuseId.value=null;
+    ExcuseU.value=true;
     const list = await ExcuseGet();
     Excuses.value = list.data
+   
   }
 
 
@@ -64,8 +69,11 @@
       count:account
     })
     console.log(res);
+    ExcuseId.value=null;
+    ExcuseD.value=true;
     const list = await ExcuseGet();
     Excuses.value = list.data
+
   } //理由库的接口函数
 
 
@@ -217,7 +225,30 @@
         ></n-input>
         <n-button @click="onClickExcuseUpdate">新建</n-button>
        </n-space>
-
+       <n-modal v-model:show="ExcuseD">
+                <n-card
+                   style="width: 300px"
+                   title=""
+                   :bordered="false"
+                   size="huge"
+                   role="dialog"
+                    aria-modal="true"
+                   >
+                 理由删除成功！
+                </n-card>
+        </n-modal>
+        <n-modal v-model:show="ExcuseU">
+                <n-card
+                   style="width: 300px"
+                   title=""
+                   :bordered="false"
+                   size="huge"
+                   role="dialog"
+                    aria-modal="true"
+                   >
+                 理由新建成功！
+                </n-card>
+        </n-modal>
 
   </n-space>
   </n-card>

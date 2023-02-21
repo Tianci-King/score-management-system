@@ -25,7 +25,8 @@
   const msgFlag = ref(false);
   const start_time = ref('2023-02-10 12:08:55');
   const end_time = ref('2023-09-30 12:08:55');
-
+  const ExcuseU =ref(false);
+  const ExcuseD =ref(false);
 
   let Applications = <any>ref([]);//获取的数据
   let Excuses = <any>ref([]);//理由库获取的数据
@@ -68,6 +69,8 @@
       count:account
     })
     console.log(res);
+    ExcuseU.value=true;
+    ExcuseId.value=null;
     const list = await ExcuseGet();
     Excuses.value = list.data
   }
@@ -79,6 +82,8 @@
       count:account
     })
     console.log(res);
+    ExcuseD.value=true;
+    ExcuseId.value=null;
     const list = await ExcuseGet();
     Excuses.value = list.data
   } //理由库的接口函数
@@ -269,18 +274,44 @@
         <n-button @click="onClickTime()">递交</n-button>
         </n-card>
        </n-space>
-<n-modal v-model:show="msgFlag">
-    <n-card
-      style="width: 300px"
-      title="注意！"
-      :bordered="false"
-      size="huge"
-      role="dialog"
-      aria-modal="true"
-    >
-      该项目或该分项分数超过上限!
-    </n-card>
-  </n-modal>
+            <n-modal v-model:show="msgFlag">
+                <n-card
+                   style="width: 300px"
+                   title="注意！"
+                   :bordered="false"
+                   size="huge"
+                   role="dialog"
+                    aria-modal="true"
+                   >
+               该项目或该分项分数超过上限!
+                </n-card>
+           </n-modal>
+
+           <n-modal v-model:show="ExcuseD">
+                <n-card
+                   style="width: 300px"
+                   title=""
+                   :bordered="false"
+                   size="huge"
+                   role="dialog"
+                    aria-modal="true"
+                   >
+                 理由删除成功！
+                </n-card>
+        </n-modal>
+        <n-modal v-model:show="ExcuseU">
+                <n-card
+                   style="width: 300px"
+                   title=""
+                   :bordered="false"
+                   size="huge"
+                   role="dialog"
+                    aria-modal="true"
+                   >
+                 理由新建成功！
+                </n-card>
+        </n-modal>
+
   </n-space>
   </n-card>
   </n-layout>

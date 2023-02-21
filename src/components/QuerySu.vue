@@ -69,8 +69,8 @@ background-color: white;
 }
 
 #Query{
-  width: 60%;
-  left: 300px;
+  width: 100%;
+  
   top: 50px;
 }
 

@@ -24,8 +24,8 @@
   const selectedId = ref(); 
   const msg = ref("");
   const msgFlag = ref(false);
-  const start_time = ref('2023-02-10 12:08:55');
-  const end_time = ref('2023-09-30 12:08:55');
+  const start_time = piniaCookie.beginTime
+  const end_time = piniaCookie.endTime
   const ExcuseU =ref(false);
   const ExcuseD =ref(false);
   const timeFlag =ref(false);

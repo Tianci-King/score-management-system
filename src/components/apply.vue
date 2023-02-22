@@ -76,6 +76,7 @@ onMounted(() => {
     <n-layout>
       <h1 id="Blank">申报</h1>
       <p>请先填写您需要申报的信息表单</p>
+      <p>当前申报的时间范围为{{beginTime}}~{{endTime}}</p>
       <n-space vertical>
         <n-input placeholder="所要申报内容的学年" v-model:value="formyear" autosize style="min-width: 90%"></n-input>
         <n-input placeholder="所要申报的项目类型" v-model:value="formscoretype" autosize style="min-width: 90%"

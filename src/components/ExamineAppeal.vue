@@ -168,6 +168,7 @@
              <th>审批理由</th>
              <th>审批建议</th>
              <th></th>
+             <th></th>
              </tr>
            </thead>
            <tbody>
@@ -181,7 +182,7 @@
                <td v-if="Appeal.state===2"><n-gradient-text type="warning">已驳回</n-gradient-text></td>
                <td>{{ Appeal.advice }}</td>
                <td>{{ Appeal.message }}</td>
-               <td><n-button size="small" @click="onClickSelect(Appeal.id)">选择</n-button></td>
+               <td><n-button size="small" @click="onClickSelect(Appeal.id)" v-if="Appeal.state===0">选择</n-button></td>
                <td><n-button size="small" v-if="Appeal.state!==0" @click="onClickDelete(Appeal.id)">撤回</n-button></td>
               </tr>
            </tbody>
@@ -259,7 +260,7 @@
 <style scoped>
 #layout1{
 height:100%;
-width: 80%;
+width: auto;
 top: 80px;
 position: absolute;
 left: 12%;

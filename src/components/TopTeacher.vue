@@ -3,11 +3,11 @@
   import {NLayout,NSpace,NLayoutHeader,NButton,NIcon} from 'naive-ui';
   import {
     PersonOutline as PersonIcon,
-    KeyOutline as KeyIcon
+    PencilOutline as KeyIcon
    } from '@vicons/ionicons5';
   import { defineComponent, ref, watch, toRaw } from "vue";
   import { useRoute } from "vue-router";
-  import { Vue2 } from "vue-demi";
+
   import router from "../routers";
 import { storeToRefs } from "pinia";
 import cookieStore from "../stores/cookieStore";
@@ -156,5 +156,9 @@ import cookieStore from "../stores/cookieStore";
   .button {
     outline:none;
     border:none;
+  }
+
+  #Title2:hover{
+    cursor: pointer;
   }
   </style>

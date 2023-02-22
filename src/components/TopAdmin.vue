@@ -15,7 +15,7 @@ import cookieStore from "../stores/cookieStore";
    const store = cookieStore();
    const {routername} = storeToRefs(store);
   const func5 = () => {
-    router.push('/'+ routername.value + '/Change');
+    router.push('/'+ store.identity + '/Change');
   }
   
 </script>

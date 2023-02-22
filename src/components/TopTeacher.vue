@@ -30,7 +30,7 @@ import cookieStore from "../stores/cookieStore";
     router.push("/" + routername.value + "/Suggest");
   }
   const func5 = () => {
-    router.push('/'+ routername.value + '/Change');
+    router.push('/'+ store.identity + '/Change');
   }
   
 </script>

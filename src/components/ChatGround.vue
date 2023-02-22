@@ -54,6 +54,7 @@
   const filteredPostList = computed(() => {
     console.log("更新了filter");
     return showMine.value ? postList.value.filter((post: object) => {
+      console.log("s")
       return post.count.toString() === cookie.account;
     }) : postList.value
   })
@@ -73,10 +74,10 @@
   <n-layout>
 
   <n-card id="chatGround">
-   <n-space>
-   <n-icon :component="CloudOutline" size="40" :depth="1" id="cloud" />
+
+  
    <h1 id="h">话题广场</h1>
-   </n-space>
+   
       <n-space vertical >
       <n-card  :bordered="false" >
       <n-space vertical id="input">
@@ -188,6 +189,7 @@ left: 12px;
 #chatGround{
 position: relative;
 width: 80%;
+
 }
 
 #h{
@@ -206,8 +208,5 @@ text-align:center
   left:80%;
 }
 
-#cloud{
-  position: relative;
-  left: 100%;
-}
+
 </style>

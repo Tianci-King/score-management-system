@@ -3,7 +3,7 @@
   import {NLayout,NSpace,NLayoutHeader,NButton,NIcon} from 'naive-ui';
   import {
     PersonOutline as PersonIcon,
-    KeyOutline as KeyIcon
+    PencilOutline as KeyIcon
    } from '@vicons/ionicons5';
 
    import { defineComponent, ref, watch, toRaw } from "vue";
@@ -134,5 +134,9 @@
     position: fixed;
     right: 7%;
     top:36px;
+  }
+
+  #Title2:hover{
+    cursor: pointer;
   }
   </style>

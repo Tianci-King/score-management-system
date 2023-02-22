@@ -37,10 +37,12 @@
       <n-input  round placeholder="老密码"
                 class="username" v-model:value="old_password"/>
     </div>
+    <br />
     <div>
       <n-input round placeholder="新密码"
                class="password" v-model:value="new_password1"/>
     </div>
+    <br />
     <div>
       <n-input round placeholder="确认新密码"
                class="password" v-model:value="new_password2"/>
@@ -62,7 +64,6 @@ background-color: white;
 }
 .button1{
   position: absolute;
-  background: red;
   right: 36%;
   top:48%;
 }

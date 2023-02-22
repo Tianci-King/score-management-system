@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { NSpace, NLayout, formDark, NButton, NIcon, NP, NTable, NText, NUpload, NUploadDragger } from 'naive-ui';
+import { NSpace, NLayout, formDark, NButton, NIcon, NP, NTable, NText, NUpload, NUploadDragger, messageDark, useMessage } from 'naive-ui';
 import cookieStore from '../stores/cookieStore';
 import { storeToRefs } from "pinia";
 import studentService from '../apis/studentService';
@@ -66,6 +66,82 @@ async function getCom() {
   }
 }
 
+const options = [
+  {
+    label: '德育素质',
+    key: 'k1',
+    children: [
+      {
+        label: '集体评定等级分',
+        key: 'd21'
+      },
+      {
+        label: '社会责任记实分',
+        key: 'd22'
+      },
+      {
+        label: '学生荣誉称号加减分',
+        key: 'd25'
+      },
+    ],
+  },
+  {
+    label: '体育素质',
+    key: 'k2',
+    children: [
+      {
+        label: '体育竞赛获得分',
+        key: 't21'
+      },
+    ],
+  },
+  {
+    label: '美育素质',
+    key: 'k3',
+    children: [
+      {
+        label: '文化艺术实践成绩',
+        key: 'm1'
+      },
+      {
+        label: '文化艺术竞赛获奖得分',
+        key: 'm2'
+      },
+    ],
+  },
+  {
+    label: '劳育素质',
+    key: 'k4',
+    children: [
+      {
+        label: '“文明寝室”创建、寝室风采展等活动加分',
+        key: 'l12'
+      },
+    ],
+  },
+  {
+    label: '创新与实践素质',
+    key: 'k5',
+    children: [
+      {
+        label: '创新创业竞赛获奖得分',
+        key: 'c11'
+      },
+      {
+        label: '水平等级考试',
+        key: 'c12'
+      },
+      {
+        label: '社会实践活动',
+        key: 'c2'
+      },
+    ],
+  },
+];
+
+const click = (key:string) => {
+  formscoretype.value = key;
+}
 onMounted(() => {
   handleClick;
 })
@@ -75,12 +151,23 @@ onMounted(() => {
   <n-space>
     <n-layout>
       <h1 id="Blank">申报</h1>
-      <p>请先填写您需要申报的信息表单</p>
-      <p>当前申报的时间范围为{{beginTime}}~{{endTime}}</p>
+      <p> 申报时间为{{beginTime}}~{{endTime}}</p>
       <n-space vertical>
         <n-input placeholder="所要申报内容的学年" v-model:value="formyear" autosize style="min-width: 90%"></n-input>
-        <n-input placeholder="所要申报的项目类型" v-model:value="formscoretype" autosize style="min-width: 90%"
+        <n-input placeholder="所要申报的项目类型" v-model:value="formscoretype" autosize style="min-width: 45%"
                  size="large"></n-input>
+        <n-space>
+          <n-layout class="dropdown">
+            <n-dropdown
+                :options="options"
+                placement="bootom-start"
+                trigger="click"
+                @select="click"
+            >
+              <n-button>选择你要申报的项目类型</n-button>
+            </n-dropdown>
+          </n-layout>
+        </n-space>
         <n-input placeholder="申报分数" v-model:value="formscore" autosize style="min-width: 90%" size="large"></n-input>
         <n-input placeholder="申报理由" v-model:value="formscoreres" autosize style="min-width: 90%" size="large"></n-input>
       </n-space>
@@ -96,8 +183,8 @@ onMounted(() => {
       <n-button :disabled="!fileListLength" style="margin-bottom: 12px" @click="handleClick">
         提交
       </n-button>
-
     </n-layout>
+
   </n-space>
 
   <n-space vertical>
@@ -137,6 +224,7 @@ onMounted(() => {
     </n-space>
 
   </n-space>
+
 </template>
 
 <style scoped>
@@ -160,5 +248,11 @@ onMounted(() => {
 .shenbao {
   top: 80px;
   left: 50%;
+}
+.dropdown {
+  position: absolute;
+  top:142px;
+  left:215px;
+  width: 200px;
 }
 </style>

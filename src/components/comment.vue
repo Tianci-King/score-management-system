@@ -1,6 +1,7 @@
 <template>
   <n-card
      :bordered="false"
+     v-if="!isDelete"
     >
     <template #header-extra>
       {{commentData.time}}
@@ -33,6 +34,8 @@ const props = defineProps({
 const emit = defineEmits(['change']);
 const pinia = cookieStore();
 const identify = pinia.identity;
+const isDelete = ref(false);
+
 function edit() {
   if(onEdit.value === false) {
     onEdit.value = true;
@@ -59,6 +62,7 @@ function deleteComment() {
   }).then((res) => {
     if(res.data.msg === "OK") {
       alert("删除成功!");
+      isDelete.value = true;
     }
     else {
       alert(res.data.msg);
@@ -71,7 +75,7 @@ const commentData = computed(() => {
   return props.data;
 })
 const isMine = computed(() => {
-   return commentData.value.count.toString() === cookie.account || cookie.account.toString() === "00000000";
+   return commentData.value.count.toString() === cookie.account || cookie.identity === "admin";
 })
 </script>
 

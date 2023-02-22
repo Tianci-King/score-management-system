@@ -96,8 +96,10 @@ function edit() {
   }
 
   function displayComment() {
-    if (showComment.value === false)
-     getComment();
+    if (showComment.value === false) {
+      getComment();
+      showComment.value = true;
+    }
     else
     showComment.value = !showComment.value;
   }
@@ -131,7 +133,6 @@ function edit() {
         console.log("更新了评论")
       }
       else {
-        showComment.value = false
         alert(res.data.msg);
       }
     })

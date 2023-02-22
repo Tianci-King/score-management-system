@@ -41,6 +41,7 @@ const columns = [
              console.log("max" + maxNum);
              if(parseFloat(data.value[index].grade) > maxNum) alert("超出上限!");
              data.value[index].grade = Math.min(maxNum,parseFloat(data.value[index].grade));
+             let len = getName(item.name).length;
              let i = index,j = index,sum = 0.0;
              while(containsNumber(getName(data.value[i].name))) i--;
              while(containsNumber(getName(data.value[j].name))) j++;
@@ -49,9 +50,8 @@ const columns = [
                sum += parseFloat(data.value[k].grade);
                console.log(sum);
              }
-             console.log(sum);
+             if(len === 2)
              data.value[i].grade = sum.toString();
-             console.log(data.value[i].grade + "结果");
            }
       })
       else

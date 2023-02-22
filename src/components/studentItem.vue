@@ -58,7 +58,7 @@ const rules = {
 function putChange() {
   console.log(formValue.value);
   adminService.changeStudent({
-    "account": formValue.value.count,
+    "account": formValue.value.account,
     "match": formValue.value.match,
   }).then((res) => {
     if (res.data.msg === "OK") {
@@ -72,12 +72,12 @@ function putChange() {
 
 function deleteStu() {
   adminService.deleteStudent({
-    account: formValue.value.count,
+    account: formValue.value.account,
   }).then((res) => {
     if (res.data.msg === "OK") {
       isDelete.value = true
-      emit('change');
       alert("删除成功!")
+      emit('change');
     }
     else
       alert(res.data.msg);

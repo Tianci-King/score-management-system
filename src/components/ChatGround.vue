@@ -13,7 +13,6 @@
   const cookie = cookieStore();
   const showMine = ref(false);
   const showModal = ref(false);
-
   function getPostItem() {
     postService.getPosts({
       count: accountStore.account,
@@ -22,12 +21,14 @@
       console.log(res.data);
       if(res.data.msg === "OK") {
         postList.value = res.data.data;
+        console.log("更新了postList")
       }
       else
         alert(res.data.msg);
     });
 
   }
+
 
 
   function sendPost() {
@@ -41,23 +42,25 @@
          alert("发送成功！")
          title.value = "";
          message.value = "";
+         getPostItem();
        }
        else
          alert(res.data.msg)
      }).catch((e) => {
        console.log(e);
      })
-     getPostItem();
   }
 
   const filteredPostList = computed(() => {
+    console.log("更新了filter");
     return showMine.value ? postList.value.filter((post: object) => {
+      console.log("s")
       return post.count.toString() === cookie.account;
     }) : postList.value
   })
 
 
-  
+
 
 
 

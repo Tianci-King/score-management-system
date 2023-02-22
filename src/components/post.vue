@@ -4,7 +4,7 @@
      :segmented="{
       content: true,
       footer: 'soft'
-    }">
+    }" v-if="!isDelete">
      <template #header>
         <div v-if="!onEdit">
           {{postData.title}}
@@ -59,7 +59,7 @@ const pinia = cookieStore();
 const identify = pinia.identity;
 const onEdit = ref<Boolean>(false)
 const emit = defineEmits(['change']);
-
+const isDelete = ref(false);
 function edit() {
   if(onEdit.value === false) {
     onEdit.value = true;
@@ -87,12 +87,12 @@ function edit() {
     }).then((res) => {
       if(res.data.msg === "OK") {
         alert("删除成功!");
+        isDelete.value = true;
       }
       else {
         alert(res.data.msg);
       }
     })
-    emit('change');
   }
 
   function displayComment() {
@@ -110,7 +110,8 @@ function edit() {
     }).then((res) => {
       console.log(res.data);
       if(res.data.msg === "OK") {
-        alert("发送成功！")
+        alert("发送成功！");
+        getComment();
         msg.value = "";
       }
       else
@@ -118,7 +119,6 @@ function edit() {
     }).catch((e) => {
       console.log(e);
     })
-    getComment();
   }
 
   function getComment() {
@@ -128,6 +128,7 @@ function edit() {
       if(res.data.msg === "OK") {
         commentData.value = res.data.data;
         showComment.value = true;
+        console.log("更新了评论")
       }
       else {
         showComment.value = false
@@ -140,7 +141,7 @@ const postData  = computed(() => {
   return props.data;
 });
 const isMine = computed(() => {
-  return cookie.account.toString() === postData.value.count || cookie.account.toString() === "00000000";
+  return cookie.account.toString() === postData.value.count || cookie.identity.toString() === "admin";
 })
 </script>
 

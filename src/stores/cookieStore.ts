@@ -3,8 +3,8 @@ import {ref} from "vue";
 const cookieStore = defineStore("account",() => {
     const cookie = ref("");
     const account = ref("");
-    const beginTime = ref();
-    const endTime = ref();
+    const beginTime = ref("");
+    const endTime = ref("");
     const identity = ref("");
     const match =ref("");
     const routername = ref("");

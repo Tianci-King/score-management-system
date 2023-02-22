@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import { NSpace,NLayout,NButton,NTable,NInput,NGradientText,NDatePicker,NCard } from 'naive-ui'
+  import { NSpace,NLayout,NButton,NTable,NInput,NGradientText,NDatePicker,NCard,NModal } from 'naive-ui'
   import {ref,onMounted} from "vue";
   import updateAPI from '../apis/Examine/ApplicationUpdate';
   import deleteAPI from '../apis/Examine/ApplicationDel';
@@ -9,7 +9,8 @@
   import getExcuseAPI from '../apis/Examine/ExcuseGet';
   import updateExcuseAPI from '../apis/Examine/ExcuseUpdate';
   import deleteExcuseAPI from '../apis/Examine/ExcuseDel';
-  import {itemMsg} from "../constants/itemMsg";
+
+ 
 
 
   const piniaCookie = cookieStore();
@@ -21,10 +22,13 @@
   const Application3 = {score:"3",score_reason:"3",score_type:"d21",time:'2007.06.30 12:08:55',state:0,id:3}
   const ApplicationTest =[Application1,Application2,Application3]   //测试使用
   const selectedId = ref(); 
-
-  const start_time = ref('2023-02-10 12:08:55');
-  const end_time = ref('2023-09-30 12:08:55');
-
+  const msg = ref("");
+  const msgFlag = ref(false);
+  const start_time_1 =ref(piniaCookie.beginTime) //piniaCookie.beginTime.value
+  const end_time_1 =ref(piniaCookie.endTime)  //piniaCookie.endTime.value
+  const ExcuseU =ref(false);
+  const ExcuseD =ref(false);
+  const timeFlag =ref(false);
 
   let Applications = <any>ref([]);//获取的数据
   let Excuses = <any>ref([]);//理由库获取的数据
@@ -33,7 +37,8 @@
   const ExcuseId = ref();
   
   const onClickPatch= (Address:any)=>{
-    window.location.href=Address;
+    let path =window.location.protocol + '//'+Address;
+    window.open(path);
   }
 
   const onClickExcuse =async()=>{
@@ -63,18 +68,24 @@
   const onClickExcuseUpdate= async()=>{
     const res = await updateExcuseAPI({
       label:newExcuse.value,
+      count:account
     })
     console.log(res);
+    ExcuseU.value=true;
+    ExcuseId.value=null;
     const list = await ExcuseGet();
     Excuses.value = list.data
   }
 
 
-  const onClickExcuseDelete= async(value:any)=>{
+  const onClickExcuseDelete= async()=>{
     const res = await deleteExcuseAPI({
-      value:value
+      value:ExcuseId.value,
+      count:account
     })
     console.log(res);
+    ExcuseD.value=true;
+    ExcuseId.value=null;
     const list = await ExcuseGet();
     Excuses.value = list.data
   } //理由库的接口函数
@@ -93,8 +104,15 @@
      state:1,
     });
     console.log(res);
+    msg.value = res.data.msg;
+    if(msg.value!=""){
+      msgFlag.value=true;
+    }
     const list = await getApplications();
     Applications.value = list.data;
+    message.value ="";
+    advice.value ="";
+    selectedId.value ="";
   }  
   //Update1是通过申报
 
@@ -108,6 +126,9 @@
     console.log(res);
     const list = await getApplications();
     Applications.value = list.data;
+    message.value ="";
+    advice.value ="";
+    selectedId.value ="";
   }
   //Update2是驳回申报
 
@@ -123,16 +144,15 @@
 
   const onClickTime = async()=>{
     const res = await timeAPI({
-      start_time:start_time.value,
-      end_time:end_time.value,
+      start_time:start_time_1,
+      end_time:end_time_1,
       count:account
     });
-    if(res.data.msg === "OK")
-       alert("设置成功!");
-    else
-      alert(res.data.msg);
     console.log(res);
+    timeFlag.value=true;
+    
   }
+
 
   const getApplications = async () =>{
     const res = await getAPI({
@@ -162,7 +182,7 @@
   <n-layout id="layout1">
   <n-card>
      <h1 id="Examine">审批申报</h1>
-
+  
   <n-space>
         <n-space vertical>    
         <h2>申报栏</h2>
@@ -171,7 +191,7 @@
              <tr>
              <th>申报序号</th>
              <th>申报分数</th>
-             <th>申报学科</th>
+             <th>申报项目</th>
              <th>申报原因</th>
              <th>申报时间</th>
              <th>申报附件</th>
@@ -185,7 +205,7 @@
              <tr v-for="Application in Applications">
                <td>{{ Application.id }}</td>
                <td>{{ Application.score }}</td>
-               <td>{{ itemMsg[Application.score_type].name }}</td>
+               <td>{{ Application.score_type }}</td>
                <td>{{ Application.score_reason }}</td>
                <td>{{ Application.time }}</td>
                <td><n-button @click="onClickPatch(Application.address)">获取附件</n-button></td>
@@ -243,14 +263,14 @@
         <n-card id="time">
         <h4>申报递交时间设置：</h4>
         <n-date-picker
-        v-model:formatted-value="start_time"
+        v-model:formatted-value="start_time_1"
         value-format="yyyy-MM-dd HH:mm:ss"
         type="datetime"
         clearable
         />
 
         <n-date-picker
-        v-model:formatted-value="end_time"
+        v-model:formatted-value="end_time_1"
         value-format="yyyy-MM-dd HH:mm:ss"
         type="datetime"
         clearable
@@ -258,6 +278,55 @@
         <n-button @click="onClickTime()">递交</n-button>
         </n-card>
        </n-space>
+            <n-modal v-model:show="msgFlag">
+                <n-card
+                   style="width: 300px"
+                   title="注意！"
+                   :bordered="false"
+                   size="huge"
+                   role="dialog"
+                    aria-modal="true"
+                   >
+               该项目或该分项分数超过上限!
+                </n-card>
+           </n-modal>
+
+           <n-modal v-model:show="ExcuseD">
+                <n-card
+                   style="width: 300px"
+                   title=""
+                   :bordered="false"
+                   size="huge"
+                   role="dialog"
+                    aria-modal="true"
+                   >
+                 理由删除成功！
+                </n-card>
+        </n-modal>
+        <n-modal v-model:show="ExcuseU">
+                <n-card
+                   style="width: 300px"
+                   title=""
+                   :bordered="false"
+                   size="huge"
+                   role="dialog"
+                    aria-modal="true"
+                   >
+                 理由新建成功！
+                </n-card>
+        </n-modal>
+        <n-modal v-model:show="timeFlag">
+                <n-card
+                   style="width: 300px"
+                   title=""
+                   :bordered="false"
+                   size="huge"
+                   role="dialog"
+                    aria-modal="true"
+                   >
+                 递交成功！
+                </n-card>
+        </n-modal>
   </n-space>
   </n-card>
   </n-layout>

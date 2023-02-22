@@ -5,33 +5,16 @@
     PersonOutline as PersonIcon,
     KeyOutline as KeyIcon
    } from '@vicons/ionicons5';
-  import { defineComponent, ref, watch, toRaw } from "vue";
-  import { useRoute } from "vue-router";
-  import { Vue2 } from "vue-demi";
-  import router from "../routers";
-import { storeToRefs } from "pinia";
-import cookieStore from "../stores/cookieStore";
 
-   const store = cookieStore();
-   const {routername} = storeToRefs(store);
-   const fun1 = () => {
-    router.push("/" + routername.value);
-   }
+   import { defineComponent, ref, watch, toRaw } from "vue";
+   import { useRoute } from "vue-router";
 
-   const fun2 = () => {
-    router.push("/" + routername.value + "/Query");
-  }
+   let router = useRoute();
+   let routerPath = router.path;
+   let str = routerPath.substring(1);
+   let routerPathFrontNumber = str.indexOf("/");
+   const routerPathFront = str.substring(0,routerPathFrontNumber);
 
-  const fun3 = () => {
-    router.push("/" + routername.value + "/ChatGround");
-  }
-
-  const fun4 = () => {
-    router.push("/" + routername.value + "/MailBox");
-  }
-  const func5 = () => {
-    router.push('/'+ routername.value + '/Change');
-  }
 
 </script>
 
@@ -46,12 +29,12 @@ import cookieStore from "../stores/cookieStore";
 
           <p id="Title1">用户页面</p>
 
-          <n-icon @click="func5()" size="30" id="key-icon">
+          <n-icon size="30" id="key-icon">
              <key-icon />
           </n-icon>
           
 
-          <a id="Title2" @click="func5()" class=" text-white nav-link">修改密码</a>
+          <a id="Title2" :href="'/'+routerPathFront+'/Change'" class=" text-white nav-link">修改密码</a>
 
           <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
             <symbol id="home" viewBox="0 0 16 16">
@@ -75,36 +58,36 @@ import cookieStore from "../stores/cookieStore";
 
           <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
             <li>
-              <button class="nav-link text-secondary button" @click="fun1()">
+              <a href="'/'+routerPathFront" class="nav-link text-white">
                 <svg class="bi d-block mx-auto mb-1" width="24" height="24">
                   <use xlink:href="#home" />
                 </svg>
                 首页
-              </button>
+              </a>
             </li>
             <li>
-              <button class="nav-link text-secondary button" @click="fun2()">
+              <a href="'/'+routerPathFront+''" class="nav-link text-secondary">
                 <svg class="bi d-block mx-auto mb-1" width="24" height="24">
                   <use xlink:href="#table" />
                 </svg>
                 综测成绩
-              </button>
+              </a>
             </li>
             <li>
-              <button class="nav-link text-secondary button" @click="fun3()">
+              <a href="'/'+routerPathFront+'/ChatGround'" class="nav-link text-white">
                 <svg class="bi d-block mx-auto mb-1" width="24" height="24">
                   <use xlink:href="#grid" />
                 </svg>
                 话题广场
-              </button>
+              </a>
             </li>
             <li>
-              <button class="nav-link text-secondary button" @click="fun4()">
+              <a href="/user" class="nav-link text-white">
                 <svg class="bi d-block mx-auto mb-1" width="24" height="24">
                   <use xlink:href="#people-circle" />
                 </svg>
                 意见反馈
-              </button>
+              </a>
             </li>
           </ul>
 
@@ -151,10 +134,5 @@ import cookieStore from "../stores/cookieStore";
     position: fixed;
     right: 7%;
     top:36px;
-  }
-
-  .button {
-    outline:none;
-    border:none;
   }
   </style>

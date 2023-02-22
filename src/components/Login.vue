@@ -19,7 +19,7 @@
      </n-icon>
 
      <n-input round placeholder="密码"
-     class="password" v-model:value="password"  type="password" show-password-on="mousedown"/>
+     class="password" v-model:value="password"  type="password" show-password-on="mousedown" maxlength="12"/>
      </n-space>
 
    </n-space>
@@ -64,7 +64,7 @@ async function login(){
     console.log(res);
     piniaCookie.cookieIs(account.value);
     piniaCookie.identityIs(res.data.data.identity.toString());
-    piniaCookie.timeIs(res.data.data.start_time,res.data.data.end_time);
+    piniaCookie.timeIs(res.data.data.start_time_1,res.data.data.end_time_1);
     piniaCookie.routernameIs(res.data.data.routername);
     piniaCookie.matchIs(res.data.data.match);
     console.log("match Is :" + res.data.data.match + piniaCookie.match)

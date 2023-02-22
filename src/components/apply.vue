@@ -4,7 +4,6 @@ import cookieStore from '../stores/cookieStore';
 import { storeToRefs } from "pinia";
 import studentService from '../apis/studentService';
 import { Ref, ref, onMounted } from 'vue';
-import internal from 'stream';
 import { defineComponent } from 'vue'
 import type { UploadInst, UploadFileInfo } from 'naive-ui'
 var formdata = <any>ref([]);

@@ -8,7 +8,9 @@ import { NMenu,NIcon} from 'naive-ui'
 import type { MenuOption } from 'naive-ui'
 import {
   ExitOutline as ExitIcon,
-  HandLeftOutline as ComplaintsIcon,
+  HandLeftOutline as ComplaintsIcon, 
+  ChatbubbleEllipsesOutline as ChatGroundIcon,
+  Pencil as PencilIcon,
 } from '@vicons/ionicons5'
 import { RouterLink } from 'vue-router'
 
@@ -66,7 +68,7 @@ const menuOptions: MenuOption[] = [
             { default: () => '话题广场' }
         ),
     key: 'adminChat',
-    icon: renderIcon(ComplaintsIcon),
+    icon: renderIcon(ChatGroundIcon),
   },
   {
     label: () =>
@@ -83,7 +85,7 @@ const menuOptions: MenuOption[] = [
             { default: () => '修改密码' }
         ),
     key: 'changePwd',
-    icon: renderIcon(ComplaintsIcon),
+    icon: renderIcon(PencilIcon),
   },
   {
     label: () =>

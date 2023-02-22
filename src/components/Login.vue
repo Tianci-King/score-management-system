@@ -52,8 +52,6 @@ const password = ref("");
 const piniaCookie = cookieStore();
 
 async function login(){
-  console.log(import.meta.env.VITE_BASE_URL);
-  console.log(password.value);
    const res = await loginApi(JSON.stringify({
      "password": password.value.toString(),
      "account": account.value.toString(),

@@ -68,7 +68,6 @@ function deleteComment() {
       alert(res.data.msg);
     }
   })
-  emit('change');
 }
 
 const commentData = computed(() => {

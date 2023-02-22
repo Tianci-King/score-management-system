@@ -336,7 +336,7 @@
 
 <style scoped>
 #layout1{
-height:100%;
+height:auto;
 width: auto;
 top: 80px;
 position: absolute;

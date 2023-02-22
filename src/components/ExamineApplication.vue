@@ -24,8 +24,8 @@
   const selectedId = ref(); 
   const msg = ref("");
   const msgFlag = ref(false);
-  const start_time_1 =ref("2022-08-12 22:00:00") //piniaCookie.beginTime.value
-  const end_time_1 =ref("2022-08-12 22:00:00")  //piniaCookie.endTime.value
+  const start_time_1 =ref(piniaCookie.beginTime) //piniaCookie.beginTime.value
+  const end_time_1 =ref(piniaCookie.endTime)  //piniaCookie.endTime.value
   const ExcuseU =ref(false);
   const ExcuseD =ref(false);
   const timeFlag =ref(false);

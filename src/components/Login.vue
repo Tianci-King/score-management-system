@@ -64,7 +64,7 @@ async function login(){
     console.log(res);
     piniaCookie.cookieIs(account.value);
     piniaCookie.identityIs(res.data.data.identity.toString());
-    piniaCookie.timeIs(res.data.data.start_time,res.data.data.end_time);
+    piniaCookie.timeIs(res.data.data.start_time_1,res.data.data.end_time_1);
     piniaCookie.routernameIs(res.data.data.routername);
     piniaCookie.matchIs(res.data.data.match);
     console.log("match Is :" + res.data.data.match + piniaCookie.match)

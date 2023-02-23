@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import { NSpace,NLayout,NButton,NTable,NInput,NGradientText,NDatePicker,NCard,NModal } from 'naive-ui'
+  import { NSpace,NLayout,NButton,NTable,NInput,NGradientText,NDatePicker,NCard,NModal, codeDark } from 'naive-ui'
   import {ref,onMounted} from "vue";
   import updateAPI from '../apis/Examine/ApplicationUpdate';
   import deleteAPI from '../apis/Examine/ApplicationDel';
@@ -105,7 +105,7 @@
     });
     console.log(res);
     msg.value = res.data.msg;
-    if(msg.value!=""){
+    if(res.data.code===200){
       msgFlag.value=true;
     }
     const list = await getApplications();

@@ -47,10 +47,12 @@ const columns = [
              while(containsNumber(getName(data.value[j].name))) j++;
              console.log(i,j);
              for(let k = i + 1 ; k < j ; k ++  ){
+               console.log(data.value[k].name)
+               if(getName(data.value[k].name).length === 2  )
                sum += parseFloat(data.value[k].grade);
                console.log(sum);
              }
-             if(len === 2)
+
              data.value[i].grade = sum.toString();
            }
       })

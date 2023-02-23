@@ -9,7 +9,7 @@
   import getExcuseAPI from '../apis/Examine/ExcuseGet';
   import updateExcuseAPI from '../apis/Examine/ExcuseUpdate';
   import deleteExcuseAPI from '../apis/Examine/ExcuseDel';
-
+  import {itemMsg} from "../constants/itemMsg";
  
 
 
@@ -206,7 +206,7 @@
              <tr v-for="Application in Applications">
                <td>{{ Application.id }}</td>
                <td>{{ Application.score }}</td>
-               <td>{{ Application.score_type }}</td>
+               <td>{{ itemMsg[Application.score_type].name }}</td>
                <td>{{ Application.score_reason }}</td>
                <td>{{ Application.time }}</td>
                <td><n-button @click="onClickPatch(Application.address)">获取附件</n-button></td>

@@ -75,9 +75,8 @@ function deleteStu() {
     account: formValue.value.account,
   }).then((res) => {
     if (res.data.msg === "OK") {
-      isDelete.value = true
       alert("删除成功!")
-      emit('change');
+      isDelete.value = true
     }
     else
       alert(res.data.msg);

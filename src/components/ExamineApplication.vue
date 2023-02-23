@@ -105,7 +105,7 @@
     });
     console.log(res);
     msg.value = res.data.msg;
-    if(res.data.code===200){
+    if(res.data.code===400){
       msgFlag.value=true;
     }
     const list = await getApplications();

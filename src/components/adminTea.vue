@@ -16,7 +16,7 @@
 import adminService from "../apis/adminService";
 import {onMounted, ref} from "vue";
 import TeacherItem from "./teacherItem.vue";
-import { NSpace,NLayout, formDark, NButton, NIcon, NP, NTable, NText, NUpload, NUploadDragger,NCard } from 'naive-ui';
+import { NSpace,NLayout, NCard } from "naive-ui";
 const data = ref();
 const addData = ref({
   count: "",
@@ -52,14 +52,14 @@ function addTeacher(){
       alert(res.data.msg);
 
     isFlash.value = false;
-  })
+  });
 }
 
 function getTeacherItem() {
   adminService.getTeacher().then((res) => {
     if(res.data.msg === "OK") {
       data.value = res.data.data;
-      console.log(data.value)
+      console.log(data.value);
     }
     else
       alert(res.data.msg);
@@ -68,7 +68,7 @@ function getTeacherItem() {
 
 onMounted(() => {
    getTeacherItem();
-})
+});
 
 </script>
 
